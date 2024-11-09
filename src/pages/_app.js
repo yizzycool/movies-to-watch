@@ -10,7 +10,8 @@ import { store } from '@/store';
 export default function App({ Component, pageProps }) {
   // import bootstrap js library
   useEffect(() => {
-    require('bootstrap/dist/js/bootstrap.bundle.min.js');
+    const bootstrap = require('bootstrap/dist/js/bootstrap.bundle.min.js');
+    window.bootstrap = bootstrap;
   }, []);
 
   return (
