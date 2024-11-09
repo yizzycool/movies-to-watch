@@ -1,0 +1,24 @@
+@import '@/styles/breakpoints.module';
+
+.leftImage {
+  height: 300px;
+  transform: translate3d(-25%, 25%, 0) rotate(30deg);
+  width: 300px;
+
+  @media (max-width: $width-xl) {
+    height: 200px;
+    width: 200px;
+  }
+}
+
+.rightImage {
+  filter: invert(0.5);
+  height: 300px;
+  transform: translate3d(25%, -25%, 0);
+  width: 300px;
+
+  @media (max-width: $width-xl) {
+    height: 200px;
+    width: 200px;
+  }
+}

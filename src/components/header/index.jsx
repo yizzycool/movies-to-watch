@@ -5,19 +5,20 @@ import SearchBar from './search-bar';
 
 export default function Header() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top px-4 py-3">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top px-2 px-lg-4 py-3">
       <div className="container-xl">
-        <a class="navbar-brand p-0 d-flex align-items-center" href="#">
+        <a className="navbar-brand p-0 d-flex align-items-center" href="#">
           <Image
             src="/favicon.png"
             alt="Logo"
             width="40"
             height="32"
-            class="d-inline-block align-text-top me-2"
+            className="d-inline-block align-text-top me-2"
           />
           <div className="d-none d-sm-inline-block">Movies to Watch</div>
         </a>
         <button
+          id="menu-toggle-button"
           className="navbar-toggler btn btn-outline-secondary"
           type="button"
           data-bs-toggle="offcanvas"
@@ -25,11 +26,7 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
-          className="offcanvas offcanvas-end"
-          tabindex="-1"
-          id="offcanvasNavbar"
-        >
+        <div className="offcanvas offcanvas-end" id="offcanvasNavbar">
           <div className="offcanvas-header">
             <div className="d-block d-lg-none">
               <ColorModeControl />
@@ -42,7 +39,7 @@ export default function Header() {
           </div>
           <div className="offcanvas-body">
             <div className="navbar-nav d-none d-lg-inline justify-content-center flex-grow-1 mx-4">
-              <SearchBar />
+              <SearchBar id="search-bar-lg" />
             </div>
             <div className="navbar-nav justify-content-end">
               <div className="nav-item">
@@ -54,7 +51,7 @@ export default function Header() {
                 <ColorModeControl />
               </div>
               <div className="d-block d-lg-none navbar-nav justify-content-center flex-grow-1">
-                <SearchBar />
+                <SearchBar id="search-bar" />
               </div>
             </div>
           </div>

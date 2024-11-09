@@ -5,6 +5,7 @@
     "order/order": ["custom-properties", "declarations"],
     "order/properties-alphabetical-order": true,
     "selector-pseudo-class-no-unknown": null,
-    "property-no-unknown": null
+    "property-no-unknown": null,
+    "selector-class-pattern": null
   }
 }

@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import _range from 'lodash/range';
 
-export default function SearchBar() {
+export default function SearchBar({ id }) {
   return (
     <div className="dropdown">
       <form className="d-flex flex-wrap mt-3 mt-lg-0">
         <input
+          id={id}
           className="form-control dropdown-toggle d-inline w-auto rounded-start-pill flex-grow-1"
           type="search"
           placeholder="Search videos"
           data-bs-toggle="dropdown"
+          aria-expanded="false"
         />
         <button
           className="btn btn-secondary rounded-end-pill "
