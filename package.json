@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@reduxjs/toolkit": "^2.3.0",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
-    "react-dom": "19.0.0-rc-02c0e824-20241028"
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "eslint": "^8",
