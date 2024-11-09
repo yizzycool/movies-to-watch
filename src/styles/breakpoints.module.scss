@@ -1,0 +1,13 @@
+$width-sm: 576px;
+$width-md: 768px;
+$width-lg: 992px;
+$width-xl: 1200px;
+$width-xxl: 1400px;
+
+:export {
+  width-lg: $width-lg;
+  width-md: $width-md;
+  width-sm: $width-sm;
+  width-xl: $width-xl;
+  width-xxl: $width-xxl;
+}

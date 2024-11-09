@@ -2,10 +2,9 @@
   "extends": "stylelint-config-standard-scss",
   "plugins": ["stylelint-order"],
   "rules": {
-    "order/order": [
-        "custom-properties",
-        "declarations"
-    ],
-    "order/properties-alphabetical-order": true
+    "order/order": ["custom-properties", "declarations"],
+    "order/properties-alphabetical-order": true,
+    "selector-pseudo-class-no-unknown": null,
+    "property-no-unknown": null
   }
 }
