@@ -1,0 +1,16 @@
+.loading-skeleton {
+  animation: 1s shimmer linear infinite;
+  background: linear-gradient(90deg, #eaeaea 8%, #d7d7d7 28%, #eaeaea 40%);
+  background-clip: content-box;
+  background-size: 1000px 200px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -500px 0;
+  }
+
+  100% {
+    background-position: 500px 0;
+  }
+}

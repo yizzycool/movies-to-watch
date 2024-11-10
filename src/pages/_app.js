@@ -1,4 +1,5 @@
 import '@/styles/globals.css';
+import '@/styles/loading-skeleton.css';
 import '@/styles/custom-bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import { useEffect } from 'react';

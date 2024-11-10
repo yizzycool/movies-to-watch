@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useGetConfigurationQuery } from '@/store/apis/tmdb';
 import ColorModeControl from './color-mode-control';
 import SearchBar from './search-bar';
 
 export default function Header() {
+  // Get configuration from TMDB API
+  useGetConfigurationQuery();
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top px-2 px-lg-4 py-3">
       <div className="container-xl">

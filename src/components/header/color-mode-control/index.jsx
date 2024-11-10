@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ColorModes from '@/data/color-modes';
 import { setColorMode } from '@/store/config/config-slice';
+import ColorModes from '@/data/color-modes';
 import _capitalize from 'lodash/capitalize';
 import _find from 'lodash/find';
 
