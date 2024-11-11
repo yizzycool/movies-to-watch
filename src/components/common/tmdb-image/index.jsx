@@ -44,7 +44,7 @@ export default function TmdbImage({ path, type }) {
 
   return (
     <Image
-      className="loading-skeleton rounded"
+      className="loading-skeleton rounded user-select-none"
       width={imageWidth}
       height={imageHeight}
       src={imagePath}
