@@ -5,6 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.scss';
 import { useEffect } from 'react';
 import Head from 'next/head';
 import Header from '@/components/header';
+import Footer from '@/components/footer';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 
@@ -28,6 +29,7 @@ export default function App({ Component, pageProps }) {
       <Provider store={store}>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </Provider>
     </>
   );
