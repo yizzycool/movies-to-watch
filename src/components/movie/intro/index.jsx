@@ -76,10 +76,11 @@ export default function Intro() {
             <h1 className="fs-2 fw-bold">{getValue('original_title')}</h1>
             <div className="d-flex">
               <div>{releaseYear}</div>
-              <i class="bi bi-dot"></i>
+              <i className="bi bi-dot"></i>
               <TmdbVideoRatingStar
                 rating={getValue('vote_average')}
                 voteCount={getValue('vote_count')}
+                stringInNewLine={false}
               />
             </div>
             <div className="my-5">

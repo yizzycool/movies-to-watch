@@ -37,9 +37,9 @@ export default function PopularMovies() {
   const { data, isLoading } = useGetPopularMovieListsQuery({ page: 1 });
   const results = _get(data, 'results', []);
 
-  const getPosterPath = (result) => _get(result, 'poster_path', '');
-
   const getMovieId = (result) => _get(result, 'id', null);
+
+  const getPosterPath = (result) => _get(result, 'poster_path', '');
 
   return (
     <div className="container-fluid bg-body-secondary py-5">

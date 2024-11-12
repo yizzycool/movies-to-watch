@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top px-2 px-lg-4 py-3">
       <div className="container-xl">
-        <a className="navbar-brand p-0 d-flex align-items-center" href="#">
+        <Link className="navbar-brand p-0 d-flex align-items-center" href="/">
           <Image
             src="/favicon.png"
             alt="Logo"
@@ -20,7 +20,7 @@ export default function Header() {
             className="d-inline-block align-text-top me-2"
           />
           <div className="d-none d-sm-inline-block">Movies to Watch</div>
-        </a>
+        </Link>
         <button
           id="menu-toggle-button"
           className="navbar-toggler btn btn-outline-secondary"

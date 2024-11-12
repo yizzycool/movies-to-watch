@@ -29,6 +29,16 @@ export const tmdbApi = createApi({
         return `movie/${id}?language=${language}`;
       },
     }),
+    searchMovies: builder.query({
+      query: ({
+        query,
+        page = 1,
+        includeAdult = false,
+        language = 'en-US',
+      }) => {
+        return `search/movie?query=${query}&page=${page}&include_adult=${includeAdult}&language=${language}`;
+      },
+    }),
   }),
 });
 
@@ -38,4 +48,5 @@ export const {
   useGetPopularMovieListsQuery,
   useLazyGetPopularMovieListsQuery,
   useLazyGetMovieDetailsQuery,
+  useLazySearchMoviesQuery,
 } = tmdbApi;
