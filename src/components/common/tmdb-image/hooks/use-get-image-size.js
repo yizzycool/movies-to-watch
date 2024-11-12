@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import useBreakpoints from '@/hooks/use-breakpoints';
 import { useGetConfigurationQuery } from '@/store/apis/tmdb';
-import { TmdbImageAspectRatios } from '..';
+import { TmdbImageAspectRatios, TmdbImageTypes } from '..';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _find from 'lodash/find';
@@ -22,14 +22,21 @@ export default function useGetImageSize({ type }) {
     }
   };
 
+  // Get minimum required image sizs for different types
+  const imageMinSize = useMemo(() => {
+    if (type === TmdbImageTypes.backdrop) {
+      return isWidthLg ? 1200 : 780;
+    }
+    return isWidthLg ? 300 : 150;
+  }, [isWidthLg, type]);
+
   // In format of 'w500', 'h632' ...
   const imageSizePath = useMemo(() => {
     const images = _get(configuration, 'images', {});
     if (_isEmpty(images)) return '';
     const sizes = _get(images, `${type}_sizes`, []);
-    const minSize = isWidthLg ? 300 : 150;
-    return _find(sizes, (size) => stringToNumber(size) >= minSize);
-  }, [type, configuration, isWidthLg]);
+    return _find(sizes, (size) => stringToNumber(size) >= imageMinSize);
+  }, [type, configuration, imageMinSize]);
 
   // Get image width by content of imageSizePath
   const imageWidth = useMemo(() => {

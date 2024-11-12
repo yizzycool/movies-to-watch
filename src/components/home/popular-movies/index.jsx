@@ -39,6 +39,8 @@ export default function PopularMovies() {
 
   const getPosterPath = (result) => _get(result, 'poster_path', '');
 
+  const getMovieId = (result) => _get(result, 'id', null);
+
   return (
     <div className="container-fluid bg-body-secondary py-5">
       <div className="container-xl">
@@ -51,6 +53,7 @@ export default function PopularMovies() {
               <SwiperSlide key={index}>
                 <div className="ratio" style={{ '--bs-aspect-ratio': '150%' }}>
                   <TmdbImage
+                    linkTo={`/movie?id=${getMovieId(result)}`}
                     path={getPosterPath(result)}
                     type={TmdbImageTypes.poster}
                   />
