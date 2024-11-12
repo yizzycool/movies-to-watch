@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <title>Movies to Watch</title>
         <meta
           name="description"
           content="Looking for a movie to watch? Movies to Watch offers the latest movie recommendations, search by genre, ratings, and reviews to help you discover great films for any mood!"
