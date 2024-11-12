@@ -44,6 +44,17 @@ export default function TmdbImage({ linkTo, path, type }) {
     return urlJoin(secureBaseUrl, imageSizePath, path);
   }, [configuration, imageSizePath, path]);
 
+  // If no image path, return 'No Image'
+  if (!path) {
+    return (
+      <Wrapper linkTo={linkTo}>
+        <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center rounded bg-body-secondary text-secondary-emphasis pe-none">
+          No Poster
+        </div>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper linkTo={linkTo}>
       <Image
@@ -59,7 +70,11 @@ export default function TmdbImage({ linkTo, path, type }) {
 
 function Wrapper({ linkTo, children }) {
   if (linkTo) {
-    return <Link href={linkTo}>{children}</Link>;
+    return (
+      <Link className="text-decoration-none" href={linkTo}>
+        {children}
+      </Link>
+    );
   }
   return children;
 }
