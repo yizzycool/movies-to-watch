@@ -5,7 +5,7 @@ import {
   useGetMovieDetailsQuery,
 } from '@/store/apis/tmdb';
 import { SwiperSlide } from 'swiper/react';
-import SwiperCarousel from '@/components/common/swiper-carousel';
+import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import LoadingSkeleton from './loading-skeleton';
 import _isEmpty from 'lodash/isEmpty';
@@ -48,7 +48,7 @@ export default function Cast() {
         {isLoading || _isEmpty(results) ? (
           <LoadingSkeleton />
         ) : (
-          <SwiperCarousel>
+          <SwiperCarouselImage>
             {results.map((result, index) => (
               <SwiperSlide key={index}>
                 <div className="card rounded">
@@ -75,7 +75,7 @@ export default function Cast() {
                 </div>
               </SwiperSlide>
             ))}
-          </SwiperCarousel>
+          </SwiperCarouselImage>
         )}
       </div>
     </div>

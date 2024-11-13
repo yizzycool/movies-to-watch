@@ -10,7 +10,7 @@ const SwiperConfigs = {
   slidesPerGroup: 1,
   spaceBetween: 8,
   loopAddBlankSlides: false,
-  centerInsufficientSlides: true,
+  centerInsufficientSlides: false,
   navigation: true,
   modules: [Navigation],
   breakpoints: {
@@ -27,6 +27,6 @@ const SwiperConfigs = {
   },
 };
 
-export default function SwiperCarousel({ children }) {
+export default function SwiperCarouselImage({ children }) {
   return <Swiper {...SwiperConfigs}>{children}</Swiper>;
 }

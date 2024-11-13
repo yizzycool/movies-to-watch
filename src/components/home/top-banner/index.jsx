@@ -26,6 +26,7 @@ export default function TopBanner() {
       <div className="container-xl d-flex" style={{ height: '500px' }}>
         <Image
           className={`${styles.leftImage} d-none d-lg-block align-self-end`}
+          priority={true}
           src="/assets/images/home/movie-film-1.png"
           width="400"
           height="400"

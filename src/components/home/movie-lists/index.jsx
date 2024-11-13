@@ -1,7 +1,7 @@
 import { SwiperSlide } from 'swiper/react';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import LoadingSkeleton from './loading-skeleton';
-import SwiperCarousel from '@/components/common/swiper-carousel';
+import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -17,7 +17,7 @@ export default function MovieLists({ title, isLoading, results }) {
         {isLoading || _isEmpty(results) ? (
           <LoadingSkeleton />
         ) : (
-          <SwiperCarousel>
+          <SwiperCarouselImage>
             {results.map((result, index) => (
               <SwiperSlide key={index}>
                 <div className="ratio" style={{ '--bs-aspect-ratio': '150%' }}>
@@ -29,7 +29,7 @@ export default function MovieLists({ title, isLoading, results }) {
                 </div>
               </SwiperSlide>
             ))}
-          </SwiperCarousel>
+          </SwiperCarouselImage>
         )}
       </div>
     </div>
