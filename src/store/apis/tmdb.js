@@ -22,9 +22,24 @@ export const tmdbApi = createApi({
     getGenreLists: builder.query({
       query: () => 'genre/movie/list',
     }),
+    getNowPlayingMovieLists: builder.query({
+      query: ({ language = 'en-US', page = 1 }) => {
+        return `/movie/now_playing?language=${language}&page=${page}`;
+      },
+    }),
     getPopularMovieLists: builder.query({
       query: ({ language = 'en-US', page = 1 }) => {
         return `movie/popular?language=${language}&page=${page}`;
+      },
+    }),
+    getTopRatedMovieLists: builder.query({
+      query: ({ language = 'en-US', page = 1 }) => {
+        return `movie/top_rated?language=${language}&page=${page}`;
+      },
+    }),
+    getUpcomingMovieLists: builder.query({
+      query: ({ language = 'en-US', page = 1 }) => {
+        return `movie/upcoming?language=${language}&page=${page}`;
       },
     }),
     getMovieDetails: builder.query({
@@ -49,8 +64,10 @@ export const {
   useAuthenticationQuery,
   useGetConfigurationQuery,
   useGetGenreListsQuery,
+  useGetNowPlayingMovieListsQuery,
   useGetPopularMovieListsQuery,
-  useLazyGetPopularMovieListsQuery,
+  useGetTopRatedMovieListsQuery,
+  useGetUpcomingMovieListsQuery,
   useLazyGetMovieDetailsQuery,
   useLazySearchMoviesQuery,
 } = tmdbApi;
