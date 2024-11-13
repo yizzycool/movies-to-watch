@@ -24,6 +24,7 @@ export default function Intro() {
   // Ex: 2024-11-12 => 2024
   const releaseYear = useMemo(() => {
     const releaseDate = getValue('release_date');
+    if (!releaseDate) return '';
     const releaseYear = moment(releaseDate).format('YYYY');
     return releaseYear;
   }, [data]);
@@ -68,13 +69,19 @@ export default function Intro() {
           <div className="w-75 ps-5">
             <h1 className="fs-2 fw-bold">{getValue('original_title')}</h1>
             <div className="d-flex">
-              <div>{releaseYear}</div>
-              <i className="bi bi-dot"></i>
-              <TmdbVideoRatingStar
-                rating={getValue('vote_average')}
-                voteCount={getValue('vote_count')}
-                stringInNewLine={false}
-              />
+              {!!releaseYear && (
+                <>
+                  <div>{releaseYear}</div>
+                  <i className="bi bi-dot"></i>
+                </>
+              )}
+              {!!getValue('vote_count') && (
+                <TmdbVideoRatingStar
+                  rating={getValue('vote_average')}
+                  voteCount={getValue('vote_count')}
+                  stringInNewLine={false}
+                />
+              )}
             </div>
             <div className="my-5">
               {infoDetails.map((info, idx) => (
