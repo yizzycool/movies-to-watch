@@ -47,6 +47,11 @@ export const tmdbApi = createApi({
         return `movie/${id}?language=${language}`;
       },
     }),
+    getMovieCredits: builder.query({
+      query: ({ id, language = 'en-US' }) => {
+        return `movie/${id}/credits?language=${language}`;
+      },
+    }),
     searchMovies: builder.query({
       query: ({
         query,
@@ -68,6 +73,7 @@ export const {
   useGetPopularMovieListsQuery,
   useGetTopRatedMovieListsQuery,
   useGetUpcomingMovieListsQuery,
-  useLazyGetMovieDetailsQuery,
+  useGetMovieDetailsQuery,
+  useGetMovieCreditsQuery,
   useLazySearchMoviesQuery,
 } = tmdbApi;

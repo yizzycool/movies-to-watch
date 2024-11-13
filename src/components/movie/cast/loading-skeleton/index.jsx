@@ -1,0 +1,37 @@
+import { useMemo } from 'react';
+import useBreakpoints from '@/hooks/use-breakpoints';
+import _range from 'lodash/range';
+
+export default function LoadingSkeleton() {
+  const { isWidthMd, isWidthLg } = useBreakpoints();
+
+  const columns = useMemo(() => {
+    if (isWidthLg) {
+      return 6;
+    } else if (isWidthMd) {
+      return 5;
+    }
+    return 3;
+  }, [isWidthLg, isWidthMd]);
+
+  return (
+    <div className="grid column-gap-3">
+      <div className="row">
+        {_range(columns).map((idx) => (
+          <div key={idx} className="col placeholder-glow">
+            <div className="card rounded">
+              <div
+                className="ratio placeholder rounded"
+                style={{ '--bs-aspect-ratio': '150%', cursor: 'unset' }}
+              />
+              <div class="card-body">
+                <div class="placeholder col-6" />
+                <div class="placeholder col-8" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

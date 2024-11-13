@@ -1,7 +1,7 @@
 import moment from 'moment';
-import { useLazyGetMovieDetailsQuery } from '@/store/apis/tmdb';
+import { useGetMovieDetailsQuery } from '@/store/apis/tmdb';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import LoadingSkeleton from './loading-skeleton';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
@@ -14,14 +14,7 @@ export default function Intro() {
   const router = useRouter();
   const id = router.query?.id || null;
 
-  const [trigger, result] = useLazyGetMovieDetailsQuery();
-  const { data, isLoading } = result;
-
-  // Call API when 'id' detected
-  useEffect(() => {
-    if (!id) return;
-    trigger({ id });
-  }, [trigger, id]);
+  const { data, isLoading } = useGetMovieDetailsQuery({ id }, { skip: !id });
 
   // Function that return value of key from data if exists. Otherwise return defaultValue.
   const getValue = (key, defaultValue = null) => {
