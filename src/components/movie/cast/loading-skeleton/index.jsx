@@ -24,9 +24,9 @@ export default function LoadingSkeleton() {
                 className="ratio placeholder rounded"
                 style={{ '--bs-aspect-ratio': '150%', cursor: 'unset' }}
               />
-              <div class="card-body">
-                <div class="placeholder col-6" />
-                <div class="placeholder col-8" />
+              <div className="card-body">
+                <div className="placeholder col-6" />
+                <div className="placeholder col-8" />
               </div>
             </div>
           </div>

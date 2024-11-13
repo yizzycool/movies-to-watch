@@ -51,7 +51,7 @@ export default function Cast() {
           <SwiperCarousel>
             {results.map((result, index) => (
               <SwiperSlide key={index}>
-                <div class="card rounded">
+                <div className="card rounded">
                   <div
                     className="card-img-top ratio"
                     style={{ '--bs-aspect-ratio': '150%' }}
@@ -61,12 +61,12 @@ export default function Cast() {
                       type={TmdbImageTypes.profile}
                     />
                   </div>
-                  <div class="card-body">
-                    <div class="card-title fw-bold text-truncate">
+                  <div className="card-body">
+                    <div className="card-title fw-bold text-truncate">
                       {getActorName(result)}
                     </div>
                     <div
-                      class="card-text text-secondary-emphasis text-truncate"
+                      className="card-text text-secondary-emphasis text-truncate"
                       style={{ fontSize: '12px' }}
                     >
                       {getCharacterName(result)}
