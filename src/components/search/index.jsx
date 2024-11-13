@@ -5,6 +5,7 @@ import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import useIntersectionObserver from '@/hooks/use-intersection-observer';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
+import TmdbGenreTag from '../common/tmdb-genre-tag';
 import LoadingSkeleton from './loading-skeleton';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
@@ -62,6 +63,8 @@ export default function Search() {
 
   const getPosterPath = (result) => _get(result, 'poster_path', '');
 
+  const getGenreIds = (result) => _get(result, 'genre_ids', []);
+
   const onPointerEnter = (idx) => setHovering(idx);
 
   const onPointerOut = () => setHovering(false);
@@ -99,6 +102,8 @@ export default function Search() {
                       rating={_get(result, 'vote_average')}
                       voteCount={_get(result, 'vote_count')}
                     />
+                    <div className="my-2" />
+                    <TmdbGenreTag genreIds={getGenreIds(result)} />
                   </div>
                 </div>
                 <div className="fw-bold mt-2">

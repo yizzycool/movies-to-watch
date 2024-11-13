@@ -19,6 +19,9 @@ export const tmdbApi = createApi({
     getConfiguration: builder.query({
       query: () => 'configuration',
     }),
+    getGenreLists: builder.query({
+      query: () => 'genre/movie/list',
+    }),
     getPopularMovieLists: builder.query({
       query: ({ language = 'en-US', page = 1 }) => {
         return `movie/popular?language=${language}&page=${page}`;
@@ -45,6 +48,7 @@ export const tmdbApi = createApi({
 export const {
   useAuthenticationQuery,
   useGetConfigurationQuery,
+  useGetGenreListsQuery,
   useGetPopularMovieListsQuery,
   useLazyGetPopularMovieListsQuery,
   useLazyGetMovieDetailsQuery,
