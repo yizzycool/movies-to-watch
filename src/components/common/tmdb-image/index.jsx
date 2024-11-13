@@ -27,6 +27,7 @@ export const TmdbImageAspectRatios = {
 export default function TmdbImage({ linkTo, path, type }) {
   // Get configuration from redux data
   const { data: configuration } = useGetConfigurationQuery();
+  const secureBaseUrl = _get(configuration, 'images.secure_base_url', '');
 
   // Parse image data (path/width/height) from TMDB configuration data
   const { imageSizePath, imageWidth, imageHeight } = useGetImageSize({ type });
@@ -37,12 +38,15 @@ export default function TmdbImage({ linkTo, path, type }) {
   //           secureBaseUrl       |----|            path
   //                            imageSizePath
   const imagePath = useMemo(() => {
-    const secureBaseUrl = _get(configuration, 'images.secure_base_url', '');
     if (!secureBaseUrl || !imageSizePath || !path) {
       return null;
     }
     return urlJoin(secureBaseUrl, imageSizePath, path);
-  }, [configuration, imageSizePath, path]);
+  }, [secureBaseUrl, imageSizePath, path]);
+
+  if (!secureBaseUrl) {
+    return null;
+  }
 
   // If no image path, return 'No Image'
   if (!path) {
@@ -62,6 +66,7 @@ export default function TmdbImage({ linkTo, path, type }) {
         width={imageWidth}
         height={imageHeight}
         src={imagePath}
+        loading="lazy"
         alt=""
       />
     </Wrapper>
