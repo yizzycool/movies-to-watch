@@ -22,7 +22,7 @@ export default function SearchBar({ id }) {
 
   return (
     <div className="dropdown">
-      <form className="d-flex flex-wrap mt-3 mt-lg-0" onSubmit={onSubmit}>
+      <form className="d-flex flex-wrap" onSubmit={onSubmit}>
         <input
           id={id}
           className="form-control dropdown-toggle d-inline w-auto rounded-start-pill flex-grow-1"

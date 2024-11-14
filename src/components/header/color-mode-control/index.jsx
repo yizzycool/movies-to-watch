@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setColorMode } from '@/store/config/config-slice';
+import { setColorMode } from '@/store/config-slice';
 import ColorModes from '@/data/color-modes';
 import _capitalize from 'lodash/capitalize';
 import _find from 'lodash/find';
@@ -22,7 +22,7 @@ export default function ColorModeControl() {
   };
 
   return (
-    <div className="nav-item dropdown ms-0 ms-lg-2">
+    <div className="nav-item dropdown ms-0 ms-lg-3">
       <button
         className="btn btn-secondary dropdown-toggle"
         type="button"
@@ -30,7 +30,10 @@ export default function ColorModeControl() {
       >
         <i className={currentColorModeIconClass}></i>
       </button>
-      <ul className="dropdown-menu dropdown-menu-lg-end">
+      <ul
+        className="dropdown-menu dropdown-menu-lg-end"
+        style={{ '--bs-dropdown-spacer': '1rem' }}
+      >
         {ColorModes.map((mode, index) => (
           <li key={index}>
             <button
