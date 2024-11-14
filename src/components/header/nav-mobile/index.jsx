@@ -1,9 +1,11 @@
+import Account from '../account';
 import ColorModeControl from '../color-mode-control';
 import SearchBar from '../search-bar';
 
 export default function NavMobile() {
   return (
     <div className="d-flex flex-grow-1 justify-content-end align-items-center">
+      <Account />
       <button
         id="menu-toggle-button"
         className="navbar-toggler btn btn-outline-secondary ms-3"

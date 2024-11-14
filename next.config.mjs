@@ -15,6 +15,12 @@ const nextConfig = {
         port: '',
         pathname: '/vi/*/maxresdefault.jpg',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/a/**',
+      },
     ],
   },
 };

@@ -1,3 +1,4 @@
+import Account from '../account';
 import ColorModeControl from '../color-mode-control';
 import SearchBar from '../search-bar';
 
@@ -7,6 +8,7 @@ export default function NavDesktop() {
       <div className="flex-grow-1 mx-5">
         <SearchBar id="search-bar-lg" />
       </div>
+      <Account />
       <ColorModeControl />
     </div>
   );
