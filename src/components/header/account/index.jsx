@@ -81,8 +81,8 @@ export default function Account() {
           <li>
             <hr className="dropdown-divider" />
           </li>
-          <Link className="dropdown-item" href="/watch-list">
-            Watch List
+          <Link className="dropdown-item" href="/watchlist">
+            Watchlist
           </Link>
           <button
             type="button"

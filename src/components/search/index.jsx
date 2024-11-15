@@ -5,7 +5,7 @@ import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import useIntersectionObserver from '@/hooks/use-intersection-observer';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
-import TmdbGenreTag from '../common/tmdb-genre-tag';
+import TmdbGenreTag from '@/components/common/tmdb-genre-tag';
 import LoadingSkeleton from './loading-skeleton';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
