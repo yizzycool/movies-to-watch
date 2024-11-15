@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import LoadingSkeleton from './loading-skeleton';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
+import FavoriteButton from '@/components/common/favorite-button';
 import _get from 'lodash/get';
 import _map from 'lodash/map';
 import _join from 'lodash/join';
@@ -67,7 +68,10 @@ export default function Intro() {
             />
           </div>
           <div className="w-75 ps-5">
-            <h1 className="fs-2 fw-bold">{getValue('original_title')}</h1>
+            <div className="d-flex justify-content-between align-items-center">
+              <h1 className="fs-2 fw-bold">{getValue('original_title')}</h1>
+              <FavoriteButton id={getValue('id')} />
+            </div>
             <div className="d-flex">
               {!!releaseYear && (
                 <>
