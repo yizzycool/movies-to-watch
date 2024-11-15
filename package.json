@@ -21,6 +21,7 @@
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-redux": "^9.1.2",
+    "redux-persist": "^6.0.0",
     "swiper": "^11.1.14",
     "url-join": "^5.0.0"
   },

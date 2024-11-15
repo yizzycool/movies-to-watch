@@ -3,11 +3,12 @@ import '@/styles/loading-skeleton.css';
 import '@/styles/custom-bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { persistor, store } from '@/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import Head from 'next/head';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import { Provider } from 'react-redux';
-import { store } from '@/store';
 
 export default function App({ Component, pageProps }) {
   // import bootstrap js library
@@ -28,9 +29,11 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="favicon.png" />
       </Head>
       <Provider store={store}>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
+        <PersistGate loading={null} persistor={persistor}>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </PersistGate>
       </Provider>
     </>
   );
