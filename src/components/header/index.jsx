@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import useRealtimeDatabaseMonitor from '@/hooks/header/user-realtime-database-monitor';
 import useBreakpoints from '@/hooks/use-breakpoints';
 import {
   useGetConfigurationQuery,
@@ -15,6 +16,9 @@ export default function Header() {
 
   // Get movie genres
   useGetGenreListsQuery();
+
+  // Monitor changes of watchlist from realtime database
+  useRealtimeDatabaseMonitor();
 
   const { isWidthLg } = useBreakpoints();
 

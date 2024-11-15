@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, AuthErrorCodes } from 'firebase/auth';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_CONFIG_API_KEY,
@@ -15,6 +16,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
+// Initialize Realtime Database and get a reference to the service
+export const db = getDatabase(app);
 
 const USER_CANCELLED = [
   AuthErrorCodes.POPUP_CLOSED_BY_USER,

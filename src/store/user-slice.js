@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import _defaultsDeep from 'lodash/defaultsDeep';
 
 const initialState = {
   isSignInUser: false,
@@ -7,6 +8,7 @@ const initialState = {
   displayName: null,
   accessToken: null,
   photoUrl: null,
+  watchlist: [],
 };
 
 export const userSlice = createSlice({
@@ -16,12 +18,16 @@ export const userSlice = createSlice({
     initUser: (_state) => {
       return initialState;
     },
-    updateUser: (_state, action) => {
-      return action.payload;
+    updateUser: (state, action) => {
+      return _defaultsDeep(action.payload, state);
+    },
+    updateWatchlist: (state, action) => {
+      const { watchlist = [] } = action.payload;
+      state.watchlist = watchlist;
     },
   },
 });
 
-export const { initUser, updateUser } = userSlice.actions;
+export const { initUser, updateUser, updateWatchlist } = userSlice.actions;
 
 export default userSlice.reducer;
