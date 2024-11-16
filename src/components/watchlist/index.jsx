@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLazyGetMovieDetailsQuery } from '@/store/apis/tmdb';
 import YourWatchlist from './your-watchlist';
+import AiRecommendedWatchlist from './ai-recommended-watchlist';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _indexOf from 'lodash/indexOf';
@@ -58,6 +59,11 @@ export default function Watchlist() {
         userSelection={userSelection}
         setUserSelection={setUserSelection}
         startAiRecommendation={triggerAiRecommendation}
+      />
+      <AiRecommendedWatchlist
+        ref={aiRef}
+        fetchedData={fetchedData}
+        userSelection={userSelection}
       />
     </>
   );
