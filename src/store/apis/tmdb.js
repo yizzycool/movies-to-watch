@@ -3,15 +3,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.themoviedb.org/3/',
-    prepareHeaders: (headers, _api) => {
-      headers.set(
-        'Authorization',
-        `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_ACCESS_TOKEN}`,
-      );
-      return headers;
-    },
+    // Proxy api route
+    baseUrl: '/api/tmdb/',
   }),
+  keepUnusedDataFor: 60,
   endpoints: (builder) => ({
     authentication: builder.query({
       query: () => 'authentication',
@@ -79,6 +74,7 @@ export const {
   useGetTopRatedMovieListsQuery,
   useGetUpcomingMovieListsQuery,
   useGetMovieDetailsQuery,
+  useLazyGetMovieDetailsQuery,
   useGetMovieCreditsQuery,
   useGetMovieVideosQuery,
   useLazySearchMoviesQuery,

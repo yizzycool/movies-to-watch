@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f .env.dev next dev",
-    "build": "env-cmd -f .env.dev next build",
-    "start": "env-cmd -f .env.dev next start",
+    "dev": "env-cmd -f .env.development env-cmd -f .env.api next dev",
+    "build": "env-cmd -f .env.production next build",
+    "start": "env-cmd -f .env.production next start",
     "lint": "next lint",
     "prepare": "husky"
   },
