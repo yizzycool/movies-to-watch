@@ -2,6 +2,7 @@ import '@/styles/globals.css';
 import '@/styles/loading-skeleton.css';
 import '@/styles/custom-bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
+import 'animate.css';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { persistor, store } from '@/store';
