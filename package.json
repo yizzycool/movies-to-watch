@@ -10,6 +10,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.3.0",
     "animate.css": "^4.1.1",
