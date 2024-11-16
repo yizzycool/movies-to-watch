@@ -1,0 +1,14 @@
+.gradientText {
+  background: linear-gradient(135deg, #0b5fd4 30%, #8d6cc7, #c44653);
+  background-clip: text;
+  display: flex;
+  font-size: 3rem;
+  justify-content: flex-start;
+  margin: 0 0 0 20px;
+  position: relative;
+  -webkit-text-fill-color: transparent;
+
+  :global {
+    animation: tada 3s ease-in-out infinite;
+  }
+}

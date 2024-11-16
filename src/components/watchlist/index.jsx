@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLazyGetMovieDetailsQuery } from '@/store/apis/tmdb';
 import YourWatchlist from './your-watchlist';
@@ -11,10 +11,14 @@ import _isNull from 'lodash/isNull';
 export default function Watchlist() {
   // Data for search results (might increase since infinte scroll)
   const [fetchedData, setFetchedData] = useState([]);
+  const [userSelection, setUserSelection] = useState({
+    selectedGenres: [],
+    currentMoods: [],
+  });
 
-  // Open AI recommendation
-  const [aiRecommendationOpened, setAiRecommendationOpened] = useState(false);
+  const aiRef = useRef(null);
 
+  // Get watchlist from redux
   const watchlist = useSelector((state) => state.user.watchlist);
 
   const [trigger, result] = useLazyGetMovieDetailsQuery();
@@ -43,14 +47,18 @@ export default function Watchlist() {
     setFetchedData((prev) => [...prev, data]);
   }, [data]);
 
+  const triggerAiRecommendation = () => {
+    aiRef?.current?.start?.();
+  };
+
   return (
     <>
       <YourWatchlist
         fetchedData={fetchedData}
-        onAiBlockClick={() => setAiRecommendationOpened(true)}
+        userSelection={userSelection}
+        setUserSelection={setUserSelection}
+        startAiRecommendation={triggerAiRecommendation}
       />
-      {/* TODO: add UI component when aiRecommendationOpened is true */}
-      {aiRecommendationOpened && null}
     </>
   );
 }

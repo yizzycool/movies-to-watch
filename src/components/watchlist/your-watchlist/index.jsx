@@ -11,7 +11,12 @@ import _isEmpty from 'lodash/isEmpty';
 import _size from 'lodash/size';
 import _range from 'lodash/range';
 
-export default function YourWatchlist({ fetchedData, onAiBlockClick }) {
+export default function YourWatchlist({
+  fetchedData,
+  userSelection,
+  setUserSelection,
+  startAiRecommendation,
+}) {
   const router = useRouter();
 
   const watchlist = useSelector((state) => state.user.watchlist);
@@ -63,7 +68,11 @@ export default function YourWatchlist({ fetchedData, onAiBlockClick }) {
             {_range(skeletonSize).map((idx) => (
               <LoadingSkeletonForMovieCard key={idx} />
             ))}
-            <AiGenBlock onClick={onAiBlockClick} />
+            <AiGenBlock
+              userSelection={userSelection}
+              setUserSelection={setUserSelection}
+              startAiRecommendation={startAiRecommendation}
+            />
           </div>
         </>
       )}

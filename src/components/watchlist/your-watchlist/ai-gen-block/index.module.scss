@@ -1,15 +1,8 @@
-.container {
-  cursor: pointer;
-}
+.stepsBlock {
+  display: flex;
+  transition: transform 400ms ease;
 
-.magicBar {
-  background: linear-gradient(135deg, #076eff 30%, #ac87eb, #ee4d5d);
-  background-clip: text;
-  font-size: 3rem;
-  -webkit-text-fill-color: transparent;
-
-  :global {
-    animation: tada 3s ease-in-out infinite;
-    animation-delay: 0s, 2s;
+  & > * {
+    width: 100%;
   }
 }
