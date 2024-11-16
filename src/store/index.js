@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { tmdbApi } from './apis/tmdb';
 import { firebaseApi } from './apis/firebase';
+import { geminiApi } from './apis/gemini';
 import persistedReducer from './reducers';
 import {
   FLUSH,
@@ -22,7 +23,8 @@ export const store = configureStore({
       },
     })
       .concat(tmdbApi.middleware)
-      .concat(firebaseApi.middleware);
+      .concat(firebaseApi.middleware)
+      .concat(geminiApi.middleware);
   },
   devTools: true,
 });

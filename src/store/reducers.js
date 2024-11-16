@@ -6,6 +6,7 @@ import userReducer from './user-slice';
 import toastReducer from './toast-slice';
 import { tmdbApi } from './apis/tmdb';
 import { firebaseApi } from './apis/firebase';
+import { geminiApi } from './apis/gemini';
 
 const reducers = combineReducers({
   config: configReducer,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   toast: toastReducer,
   [tmdbApi.reducerPath]: tmdbApi.reducer,
   [firebaseApi.reducerPath]: firebaseApi.reducer,
+  [geminiApi.reducerPath]: geminiApi.reducer,
 });
 
 const persistConfig = {
