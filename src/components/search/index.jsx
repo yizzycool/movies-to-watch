@@ -1,18 +1,14 @@
-import styles from './index.module.scss';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import useIntersectionObserver from '@/hooks/use-intersection-observer';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
-import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
-import TmdbGenreTag from '@/components/common/tmdb-genre-tag';
+import TmdbMovieHoverMask from '../common/tmdb-movie-hover-mask';
 import LoadingSkeleton from './loading-skeleton';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 
 export default function Search() {
-  // Show video info when user hovering
-  const [hovering, setHovering] = useState(false);
   // Data for search results (might increase since infinte scroll)
   const [fetchedData, setFetchedData] = useState(null);
 
@@ -63,11 +59,11 @@ export default function Search() {
 
   const getPosterPath = (result) => _get(result, 'poster_path', '');
 
-  const getGenreIds = (result) => _get(result, 'genre_ids', []);
-
-  const onPointerEnter = (idx) => setHovering(idx);
-
-  const onPointerOut = () => setHovering(false);
+  // Navigate to /movie page
+  const onMovieClick = (result) => {
+    const url = `/movie?id=${getMovieId(result)}`;
+    router.push(url);
+  };
 
   return (
     <div className="container-xl text-center">
@@ -78,33 +74,22 @@ export default function Search() {
           <div className="fs-3 mt-5">
             Search Results for <span className="text-info">{query}</span>
           </div>
-          {/* <div className="fs-4 mt-2 text-info">{query}</div> */}
           <div className="row gx-3 gy-3 my-5">
             {fetchedData?.results.map((result, idx) => (
               <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
                 <div
-                  className="position-relative ratio"
+                  className="position-relative ratio rounded overflow-hidden"
                   style={{ '--bs-aspect-ratio': '150%' }}
-                  onPointerEnter={() => onPointerEnter(idx)}
-                  onPointerOut={onPointerOut}
                 >
                   <TmdbImage
                     linkTo={`/movie?id=${getMovieId(result)}`}
                     path={getPosterPath(result)}
                     type={TmdbImageTypes.poster}
                   />
-                  <div
-                    className={
-                      hovering === idx ? styles.maskHovering : styles.mask
-                    }
-                  >
-                    <TmdbVideoRatingStar
-                      rating={_get(result, 'vote_average')}
-                      voteCount={_get(result, 'vote_count')}
-                    />
-                    <div className="my-2" />
-                    <TmdbGenreTag genreIds={getGenreIds(result)} />
-                  </div>
+                  <TmdbMovieHoverMask
+                    result={result}
+                    onClick={() => onMovieClick(result)}
+                  />
                 </div>
                 <div className="fw-bold mt-2">
                   {_get(result, 'original_title')}
