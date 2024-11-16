@@ -12,6 +12,9 @@ export default function Watchlist() {
   // Data for search results (might increase since infinte scroll)
   const [fetchedData, setFetchedData] = useState([]);
 
+  // Open AI recommendation
+  const [aiRecommendationOpened, setAiRecommendationOpened] = useState(false);
+
   const watchlist = useSelector((state) => state.user.watchlist);
 
   const [trigger, result] = useLazyGetMovieDetailsQuery();
@@ -40,5 +43,14 @@ export default function Watchlist() {
     setFetchedData((prev) => [...prev, data]);
   }, [data]);
 
-  return <YourWatchlist fetchedData={fetchedData} />;
+  return (
+    <>
+      <YourWatchlist
+        fetchedData={fetchedData}
+        onAiBlockClick={() => setAiRecommendationOpened(true)}
+      />
+      {/* TODO: add UI component when aiRecommendationOpened is true */}
+      {aiRecommendationOpened && null}
+    </>
+  );
 }

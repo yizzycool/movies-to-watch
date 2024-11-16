@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
 import LoadingSkeleton from './loading-skeleton';
+import LoadingSkeletonForMovieCard from './loading-skeleton/movie-card';
+import AiGenBlock from './ai-gen-block';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _size from 'lodash/size';
 import _range from 'lodash/range';
 
-export default function YourWatchlist({ fetchedData }) {
+export default function YourWatchlist({ fetchedData, onAiBlockClick }) {
   const router = useRouter();
 
   const watchlist = useSelector((state) => state.user.watchlist);
@@ -59,17 +61,9 @@ export default function YourWatchlist({ fetchedData }) {
               </div>
             ))}
             {_range(skeletonSize).map((idx) => (
-              <div
-                key={idx}
-                className="col-6 col-sm-4 col-md-3 col-lg-2 placeholder-glow"
-              >
-                <div
-                  className="position-relative ratio placeholder rounded"
-                  style={{ '--bs-aspect-ratio': '150%' }}
-                />
-                <div className="fw-bold mt-2 placeholder col-10  rounded" />
-              </div>
+              <LoadingSkeletonForMovieCard key={idx} />
             ))}
+            <AiGenBlock onClick={onAiBlockClick} />
           </div>
         </>
       )}
