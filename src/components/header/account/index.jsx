@@ -1,9 +1,8 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useLazySignInQuery, useLazySignOutQuery } from '@/store/apis/firebase';
 import { setShowToast } from '@/store/toast-slice';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function Account() {
   const dispatch = useDispatch();
@@ -19,9 +18,11 @@ export default function Account() {
   const user = useSelector((state) => state.user);
   const { isSignInUser, photoUrl } = user;
 
-  // Trigger toast message to show sign in / sign out
-  useEffect(() => {
-    if (!isSignInUser) return;
+  // Call firebase signIn API and trigger toast message
+  const onSignIn = async () => {
+    if (isSignInUser) return;
+    const { isSuccess } = await triggerSignIn();
+    if (!isSuccess) return;
     dispatch(
       setShowToast({
         show: true,
@@ -29,16 +30,13 @@ export default function Account() {
         content: 'Signed In Successfully',
       }),
     );
-  }, [isSignInUser, dispatch]);
-
-  const onSignIn = () => {
-    if (isSignInUser) return;
-    triggerSignIn();
   };
 
-  const onSignOut = () => {
+  // Call firebase signOut API and trigger toast message
+  const onSignOut = async () => {
     if (!isSignInUser) return;
-    triggerSignOut();
+    const { isSuccess } = await triggerSignOut();
+    if (!isSuccess) return;
     dispatch(
       setShowToast({
         show: true,
