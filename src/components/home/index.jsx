@@ -45,21 +45,25 @@ export default function Home() {
         title="Now Playing"
         results={_get(nowPlayingData, 'results', [])}
         isLoading={nowPlayingDataIsLoading}
+        linkTo="/now-playing"
       />
       <MovieLists
         title="Popular"
         results={_get(popularData, 'results', [])}
         isLoading={popularDataIsLoading}
+        linkTo="/popular"
       />
       <MovieLists
         title="Top Rated"
         results={_get(topRatedData, 'results', [])}
         isLoading={topRatedDataIsLoading}
+        linkTo="/top-rated"
       />
       <MovieLists
         title="Upcoming"
         results={_get(upcomingData, 'results', [])}
         isLoading={upcomingDataIsLoading}
+        linkTo="/upcoming"
       />
     </>
   );
