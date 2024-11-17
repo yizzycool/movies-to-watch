@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useGetAiRecommendationMutation } from '@/store/apis/gemini';
 import _get from 'lodash/get';
-import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 
 export default function useQueryAiRecommendedWatchlist({
@@ -9,6 +8,10 @@ export default function useQueryAiRecommendedWatchlist({
   userSelection,
 }) {
   const [run, setRun] = useState(false);
+  const [aiRecommendationParams, setAiRecommendationParams] = useState({
+    genres: [],
+    moods: [],
+  });
   const { selectedGenres, currentMoods } = userSelection;
 
   // Prepare data for useGetAiRecommendationMutation API
@@ -23,18 +26,14 @@ export default function useQueryAiRecommendedWatchlist({
   // Call api to get ai recommendation data
   useEffect(() => {
     if (!run) return;
+    setAiRecommendationParams({ genres: selectedGenres, moods: currentMoods });
     trigger({ watchlist, selectedGenres, currentMoods });
   }, [run]);
-
-  // Reset 'run' to be false after task run successfully
-  useEffect(() => {
-    if (_isEmpty(aiRecommendations)) return;
-    setRun(false);
-  }, [aiRecommendations]);
 
   return {
     run,
     setRun,
     aiRecommendations,
+    aiRecommendationParams,
   };
 }

@@ -7,7 +7,7 @@ export default function GenresBlock({ selectedGenres, updateSelectedGenres }) {
   const { data } = useGetGenreListsQuery();
   const { genres = [] } = data || {};
 
-  const isActive = (id) => _includes(selectedGenres, id);
+  const isActive = (name) => _includes(selectedGenres, name);
 
   return (
     <div className="mt-4">
@@ -16,8 +16,8 @@ export default function GenresBlock({ selectedGenres, updateSelectedGenres }) {
         {_map(genres, (genre) => (
           <div
             key={genre.id}
-            className={isActive(genre.id) ? styles.genreActive : styles.genre}
-            onClick={() => updateSelectedGenres(genre.id)}
+            className={isActive(genre.name) ? styles.genreActive : styles.genre}
+            onClick={() => updateSelectedGenres(genre.name)}
           >
             {genre.name}
           </div>

@@ -1,3 +1,4 @@
+import styles from './index.module.scss';
 import {
   forwardRef,
   useEffect,
@@ -10,13 +11,15 @@ import useQueryAiRecommendedWatchlist from '@/hooks/watchlist/ai-recommended-wat
 import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
-import LoadingSkeleton from './loading-skeleton';
 import LoadingSkeletonForMovieCard from './loading-skeleton/movie-card';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _size from 'lodash/size';
 import _range from 'lodash/range';
 import _indexOf from 'lodash/indexOf';
+import _map from 'lodash/map';
+import _entries from 'lodash/entries';
+import _capitalize from 'lodash/capitalize';
 
 export default forwardRef(function AiRecommendedWatchlist(
   { fetchedData, userSelection },
@@ -25,18 +28,20 @@ export default forwardRef(function AiRecommendedWatchlist(
   const router = useRouter();
 
   // Hook to get ai recommendation movie lists
-  const { setRun, aiRecommendations } = useQueryAiRecommendedWatchlist({
-    fetchedData,
-    userSelection,
-  });
+  const { run, setRun, aiRecommendations, aiRecommendationParams } =
+    useQueryAiRecommendedWatchlist({
+      fetchedData,
+      userSelection,
+    });
 
   const [recommendationData, setRecommendationData] = useState([]);
   const [searchTrigger, result] = useLazySearchMoviesQuery();
   const { data, originalArgs } = result;
 
   const skeletonSize = useMemo(() => {
+    if (run && _isEmpty(aiRecommendations)) return 10;
     return _size(aiRecommendations) - _size(recommendationData);
-  }, [aiRecommendations, recommendationData]);
+  }, [run, aiRecommendations, recommendationData]);
 
   // Trigger Tmdb search API after get ai recommendation list (movie titles)
   useEffect(() => {
@@ -51,7 +56,11 @@ export default forwardRef(function AiRecommendedWatchlist(
     const lastQuery = _get(originalArgs, 'query');
     const lastIndex = _indexOf(aiRecommendations, lastQuery);
     if (lastIndex === -1) return;
-    if (lastIndex === _size(aiRecommendations) - 1) return;
+    if (lastIndex === _size(aiRecommendations) - 1) {
+      // Reset 'run' to be false after task run successfully
+      setRun(false);
+      return;
+    }
     searchTrigger({ query: aiRecommendations[lastIndex + 1] });
   }, [data]);
 
@@ -67,6 +76,13 @@ export default forwardRef(function AiRecommendedWatchlist(
     start: () => {
       setRecommendationData([]);
       setRun(true);
+      // Scroll to bottom
+      setTimeout(() => {
+        const container = document.getElementById(
+          'ai-recommendation-container',
+        );
+        window.scrollTo(0, container.offsetTop);
+      }, 500);
     },
   }));
 
@@ -80,41 +96,48 @@ export default forwardRef(function AiRecommendedWatchlist(
     router.push(url);
   };
 
+  if (!run && _isEmpty(data)) return null;
+
   return (
-    <div className="container-xl text-center border-top">
-      {_isEmpty(recommendationData) ? (
-        <LoadingSkeleton />
-      ) : (
-        <>
-          <div className="fs-3 mt-5">AI Recommended Watchlist</div>
-          <div className="row gx-3 gy-3 my-5">
-            {recommendationData.map((result, idx) => (
-              <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <div
-                  className="position-relative ratio rounded overflow-hidden"
-                  style={{ '--bs-aspect-ratio': '150%' }}
-                >
-                  <TmdbImage
-                    linkTo={`/movie?id=${getMovieId(result)}`}
-                    path={getPosterPath(result)}
-                    type={TmdbImageTypes.poster}
-                  />
-                  <TmdbMovieHoverMask
-                    result={result}
-                    onClick={() => onMovieClick(result)}
-                  />
-                </div>
-                <div className="fw-bold mt-2">
-                  {_get(result, 'original_title')}
-                </div>
-              </div>
-            ))}
-            {_range(skeletonSize).map((idx) => (
-              <LoadingSkeletonForMovieCard key={idx} />
-            ))}
+    <div
+      id="ai-recommendation-container"
+      className="container-xl text-center border-top"
+    >
+      <div className="fs-3 my-5">AI Recommended Watchlist</div>
+      {_map(_entries(aiRecommendationParams), ([key, value]) => (
+        <div key={key} className="d-flex align-items-center my-3 fw-bold">
+          {_capitalize(key)}:
+          {_map(value, (item) => (
+            <div key={item} className={styles.label}>
+              {item}
+            </div>
+          ))}
+        </div>
+      ))}
+      <div className="row gx-3 gy-3 my-2 py-4">
+        {recommendationData.map((result, idx) => (
+          <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div
+              className="position-relative ratio rounded overflow-hidden"
+              style={{ '--bs-aspect-ratio': '150%' }}
+            >
+              <TmdbImage
+                linkTo={`/movie?id=${getMovieId(result)}`}
+                path={getPosterPath(result)}
+                type={TmdbImageTypes.poster}
+              />
+              <TmdbMovieHoverMask
+                result={result}
+                onClick={() => onMovieClick(result)}
+              />
+            </div>
+            <div className="fw-bold mt-2">{_get(result, 'original_title')}</div>
           </div>
-        </>
-      )}
+        ))}
+        {_range(skeletonSize).map((idx) => (
+          <LoadingSkeletonForMovieCard key={idx} />
+        ))}
+      </div>
     </div>
   );
 });
