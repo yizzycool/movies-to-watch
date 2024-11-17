@@ -1,24 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PositionMapX, PositionMapY } from '@/data/common/bootstrap-toast';
 import { setShowToast } from '@/store/toast-slice';
 import _get from 'lodash/get';
+
+const Options = {
+  delay: 2000,
+};
 
 // position: {
 //   x: ['left', 'center', 'right' ],
 //   y: ['top' , 'middle', 'bottom'],
 // }
-
-const PositionMapX = {
-  left: 'start-0',
-  center: 'start-50 translate-middle-x',
-  right: 'end-0',
-};
-
-const PositionMapY = {
-  top: 'top-0',
-  middle: 'top-50translate-middle-y',
-  bottom: 'bottom-0',
-};
 
 export default function BootstrapToast() {
   const dispatch = useDispatch();
@@ -47,7 +40,10 @@ export default function BootstrapToast() {
   const popup = () => {
     const toastEl = document.getElementById('movie-to-watch-toast');
     const hasInstance = !!window.bootstrap.Toast.getInstance(toastEl);
-    const toastBootstrap = window.bootstrap.Toast.getOrCreateInstance(toastEl);
+    const toastBootstrap = window.bootstrap.Toast.getOrCreateInstance(
+      toastEl,
+      Options,
+    );
     toastBootstrap?.show();
     if (!hasInstance) {
       registerEventListener(toastEl);
