@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import configReducer from './config-slice';
 import userReducer from './user-slice';
 import toastReducer from './toast-slice';
+import searchHistoryReducer from './search-history-slice';
 import { tmdbApi } from './apis/tmdb';
 import { firebaseApi } from './apis/firebase';
 import { geminiApi } from './apis/gemini';
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   config: configReducer,
   user: userReducer,
   toast: toastReducer,
+  searchHistory: searchHistoryReducer,
   [tmdbApi.reducerPath]: tmdbApi.reducer,
   [firebaseApi.reducerPath]: firebaseApi.reducer,
   [geminiApi.reducerPath]: geminiApi.reducer,
@@ -20,7 +22,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user'],
+  whitelist: ['user', 'searchHistory'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
