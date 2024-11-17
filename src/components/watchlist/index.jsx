@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLazyGetMovieDetailsQuery } from '@/store/apis/tmdb';
 import YourWatchlist from './your-watchlist';
 import AiRecommendedWatchlist from './ai-recommended-watchlist';
+import SlotMachine from './slot-machine';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _indexOf from 'lodash/indexOf';
@@ -53,7 +54,7 @@ export default function Watchlist() {
   };
 
   return (
-    <>
+    <div className="container-xl position-relative">
       <YourWatchlist
         fetchedData={fetchedData}
         userSelection={userSelection}
@@ -65,6 +66,7 @@ export default function Watchlist() {
         fetchedData={fetchedData}
         userSelection={userSelection}
       />
-    </>
+      <SlotMachine fetchedData={fetchedData} />
+    </div>
   );
 }

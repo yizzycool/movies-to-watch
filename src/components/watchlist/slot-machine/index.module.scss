@@ -1,0 +1,11 @@
+.aspectRatioBlock {
+  aspect-ratio: 2/3;
+  height: min(45vh, 500px);
+  margin: 30px auto 100px;
+}
+
+.swiper {
+  :global .swiper-wrapper {
+    transition-timing-function: linear;
+  }
+}
