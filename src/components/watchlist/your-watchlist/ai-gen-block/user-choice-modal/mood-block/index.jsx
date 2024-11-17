@@ -1,30 +1,7 @@
 import styles from './index.module.scss';
+import { Moods } from '@/data/watchlist/your-watchlist/ai-gen-block/user-choice-modal';
 import _map from 'lodash/map';
 import _includes from 'lodash/includes';
-
-// Hardcode 20 types of moods
-const Moods = [
-  'Happy',
-  'Excited',
-  'Relaxed',
-  'Content',
-  'Melancholic',
-  'Sad',
-  'Anxious',
-  'Nervous',
-  'Angry',
-  'Calm',
-  'Thrilled',
-  'Touched',
-  'Romantic',
-  'Nostalgic',
-  'Tired',
-  'Confused',
-  'Confident',
-  'Motivated',
-  'Lonely',
-  'Curious',
-];
 
 export default function MoodBlock({ currentMoods, updateCurrentMoods }) {
   const isActive = (id) => _includes(currentMoods, id);
