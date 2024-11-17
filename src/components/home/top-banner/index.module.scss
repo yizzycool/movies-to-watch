@@ -1,5 +1,9 @@
 @import '@/styles/breakpoints.module';
 
+.innerContainer {
+  height: min(700px, 80vh);
+}
+
 .leftImage {
   height: 300px;
   transform: translate3d(-25%, 25%, 0) rotate(30deg);
@@ -20,5 +24,34 @@
   @media (max-width: $width-xl) {
     height: 200px;
     width: 200px;
+  }
+}
+
+.backgroundBlock {
+  animation: 150s linear 0s infinite normal none running slide;
+  display: flex;
+  height: 100%;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  width: fit-content;
+  z-index: -1;
+}
+
+.backgroundImage {
+  aspect-ratio: 3;
+  height: 100%;
+  object-fit: cover;
+  width: auto;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
   }
 }

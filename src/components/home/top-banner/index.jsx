@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import Image from 'next/image';
 import useBreakpoints from '@/hooks/use-breakpoints';
+import _range from 'lodash/range';
 
 export default function TopBanner() {
   const { isWidthLg } = useBreakpoints();
@@ -20,19 +21,17 @@ export default function TopBanner() {
   };
 
   return (
-    <div className="container-fluid overflow-hidden">
-      <div className="container-xl d-flex" style={{ height: '500px' }}>
-        <Image
-          className={`${styles.leftImage} d-none d-lg-block align-self-end`}
-          priority={true}
-          src="/assets/images/home/movie-film-1.png"
-          width="400"
-          height="400"
-          alt="movie file"
-        />
-        <div className="flex-grow-1 text-center m-auto">
+    <div className="container-fluid position-relative overflow-hidden">
+      <div className={`container-xl d-flex ${styles.innerContainer}`}>
+        <div
+          className="flex-grow-1 text-center m-auto"
+          style={{ maxWidth: '800px' }}
+        >
           <h1>Discover Your Next Favorite Movie</h1>
-          <h5 className="text-secondary mt-3" style={{ lineHeight: '1.8rem' }}>
+          <h5
+            className="text-secondary-emphasis mt-5"
+            style={{ lineHeight: '1.8rem' }}
+          >
             Unlock a world of cinematic adventure with personalized movie
             recommendations tailored just for you. Explore thousands of films,
             from hidden gems to the latest blockbusters, and find the perfect
@@ -46,13 +45,19 @@ export default function TopBanner() {
             <span className="fw-bold fs-5">Search Movies</span>
           </button>
         </div>
-        <Image
-          className={`${styles.rightImage} d-none d-lg-block align-self-start`}
-          src="/assets/images/home/movie-film-2.png"
-          width="400"
-          height="400"
-          alt="movie file"
-        />
+      </div>
+      <div className={styles.backgroundBlock}>
+        {_range(2).map((idx) => (
+          <Image
+            key={idx}
+            className={styles.backgroundImage}
+            width="3000"
+            height="1000"
+            src="/assets/images/home/background.png"
+            priority={true}
+            alt=""
+          />
+        ))}
       </div>
     </div>
   );

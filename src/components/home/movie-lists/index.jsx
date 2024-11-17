@@ -23,10 +23,10 @@ export default function MovieLists({
           {title}
           <Link
             href={linkTo}
-            className="text-secondary text-decoration-none fs-5"
+            className="text-body-emphasis text-decoration-none fs-5"
           >
             See More
-            <i class="bi bi-chevron-right ms-1"></i>
+            <i className="bi bi-chevron-right ms-1"></i>
           </Link>
         </h3>
         {isLoading || _isEmpty(results) ? (
