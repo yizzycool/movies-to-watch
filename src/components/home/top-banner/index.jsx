@@ -9,15 +9,13 @@ export default function TopBanner() {
     if (isWidthLg) {
       // for desktop mode
       const searchBar = window.document.getElementById('search-bar-lg');
-      setTimeout(() => searchBar.click());
+      searchBar.focus();
     } else {
       // for mobile mode
       const menuIcon = window.document.getElementById('menu-toggle-button');
       const searchBar = window.document.getElementById('search-bar');
-      setTimeout(() => {
-        menuIcon.click();
-        searchBar.click();
-      });
+      menuIcon.click();
+      searchBar.focus();
     }
   };
 
