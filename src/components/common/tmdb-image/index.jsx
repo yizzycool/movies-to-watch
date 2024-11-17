@@ -52,7 +52,7 @@ export default function TmdbImage({ linkTo, path, type }) {
   if (!path) {
     return (
       <Wrapper linkTo={linkTo}>
-        <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center rounded bg-body-secondary text-secondary-emphasis pe-none">
+        <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center bg-body-secondary text-secondary-emphasis pe-none">
           No Poster
         </div>
       </Wrapper>
@@ -62,7 +62,7 @@ export default function TmdbImage({ linkTo, path, type }) {
   return (
     <Wrapper linkTo={linkTo}>
       <Image
-        className="loading-skeleton w-100 h-100 object-fit-cover rounded user-select-none"
+        className="loading-skeleton w-100 h-100 object-fit-cover user-select-none"
         width={imageWidth}
         height={imageHeight}
         src={imagePath}

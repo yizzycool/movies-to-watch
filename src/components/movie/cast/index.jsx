@@ -51,7 +51,7 @@ export default function Cast() {
           <SwiperCarouselImage>
             {results.map((result, index) => (
               <SwiperSlide key={index}>
-                <div className="card rounded">
+                <div className="card rounded overflow-hidden">
                   <div
                     className="card-img-top ratio"
                     style={{ '--bs-aspect-ratio': '150%' }}

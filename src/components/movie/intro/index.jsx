@@ -61,7 +61,7 @@ export default function Intro() {
       </div>
       <div className="container-xl py-5">
         <div className="d-flex align-items-start">
-          <div className="flex-shrink-1 w-25">
+          <div className="flex-shrink-1 w-25 rounded overflow-hidden">
             <TmdbImage
               path={getValue('poster_path')}
               type={TmdbImageTypes.poster}
