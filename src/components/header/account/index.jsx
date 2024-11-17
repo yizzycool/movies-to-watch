@@ -52,7 +52,7 @@ export default function Account() {
         <button
           type="button"
           className="btn btn-primary position-relative rounded-circle p-2 d-flex justify-content-center align-items-center overflow-hidden"
-          style={{ width: '40px', height: '40px' }}
+          style={{ width: '40px', height: '40px', '--bs-btn-border-width': 0 }}
           data-bs-toggle={isSignInUser ? 'dropdown' : ''}
           onClick={onSignIn}
         >
