@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import configReducer from './config-slice';
 import userReducer from './user-slice';
 import toastReducer from './toast-slice';
+import modalReducer from './modal-slice';
 import searchHistoryReducer from './search-history-slice';
 import { tmdbApi } from './apis/tmdb';
 import { firebaseApi } from './apis/firebase';
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   config: configReducer,
   user: userReducer,
   toast: toastReducer,
+  modal: modalReducer,
   searchHistory: searchHistoryReducer,
   [tmdbApi.reducerPath]: tmdbApi.reducer,
   [firebaseApi.reducerPath]: firebaseApi.reducer,

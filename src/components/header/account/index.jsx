@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useLazySignInQuery, useLazySignOutQuery } from '@/store/apis/firebase';
+import { useLazySignOutQuery } from '@/store/apis/firebase';
 import { setShowToast } from '@/store/toast-slice';
+import { setShowSignInModal } from '@/store/modal-slice';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Account() {
   const dispatch = useDispatch();
-
-  // Google sign in API
-  const [triggerSignIn] = useLazySignInQuery();
 
   // Google sign out API
   const [triggerSignOut, { isLoading: isLogoutLoading }] =
@@ -21,15 +19,7 @@ export default function Account() {
   // Call firebase signIn API and trigger toast message
   const onSignIn = async () => {
     if (isSignInUser) return;
-    const { isSuccess } = await triggerSignIn();
-    if (!isSuccess) return;
-    dispatch(
-      setShowToast({
-        show: true,
-        title: 'Welcome back',
-        content: 'Signed In Successfully',
-      }),
-    );
+    dispatch(setShowSignInModal(true));
   };
 
   // Call firebase signOut API and trigger toast message

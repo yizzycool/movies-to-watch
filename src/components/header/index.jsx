@@ -9,6 +9,7 @@ import {
 import NavDesktop from './nav-desktop';
 import NavMobile from './nav-mobile';
 import BootstrapToast from '../common/bootstrap-toast';
+import SignInModal from './sign-in-modal';
 
 export default function Header() {
   // Get configuration from TMDB API
@@ -40,6 +41,7 @@ export default function Header() {
         </div>
       </nav>
       <BootstrapToast />
+      <SignInModal />
     </>
   );
 }
