@@ -12,6 +12,7 @@ import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
 import LoadingSkeletonForMovieCard from './loading-skeleton/movie-card';
+import SomethingWentWrong from './something-went-wrong';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _size from 'lodash/size';
@@ -29,7 +30,7 @@ export default forwardRef(function AiRecommendedWatchlist(
   const router = useRouter();
 
   // Hook to get ai recommendation movie lists
-  const { run, setRun, aiRecommendations, aiRecommendationParams } =
+  const { run, setRun, aiRecommendations, aiRecommendationParams, isError } =
     useQueryAiRecommendedWatchlist({
       fetchedData,
       userSelection,
@@ -40,9 +41,9 @@ export default forwardRef(function AiRecommendedWatchlist(
   const { data, originalArgs } = result;
 
   const skeletonSize = useMemo(() => {
-    if (run && _isEmpty(aiRecommendations)) return 10;
+    if (run && !isError && _isEmpty(aiRecommendations)) return 10;
     return _size(aiRecommendations) - _size(recommendationData);
-  }, [run, aiRecommendations, recommendationData]);
+  }, [run, isError, aiRecommendations, recommendationData]);
 
   // Filter out empty arry
   const filteredAiRecommendationParams = useMemo(() => {
@@ -112,40 +113,48 @@ export default forwardRef(function AiRecommendedWatchlist(
       className="container-xl text-center border-top"
     >
       <div className="fs-3 my-5">AI Recommended Watchlist</div>
-      {_map(filteredAiRecommendationParams, ([key, value]) => (
-        <div key={key} className="d-flex align-items-center my-3 fw-bold">
-          {_capitalize(key)}:
-          {_map(value, (item) => (
-            <div key={item} className={styles.label}>
-              {item}
+      {isError ? (
+        <SomethingWentWrong />
+      ) : (
+        <>
+          {_map(filteredAiRecommendationParams, ([key, value]) => (
+            <div key={key} className="d-flex align-items-center my-3 fw-bold">
+              {_capitalize(key)}:
+              {_map(value, (item) => (
+                <div key={item} className={styles.label}>
+                  {item}
+                </div>
+              ))}
             </div>
           ))}
-        </div>
-      ))}
-      <div className="row gx-3 gy-3 my-2 py-4">
-        {recommendationData.map((result, idx) => (
-          <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
-            <div
-              className="position-relative ratio rounded overflow-hidden"
-              style={{ '--bs-aspect-ratio': '150%' }}
-            >
-              <TmdbImage
-                linkTo={`/movie?id=${getMovieId(result)}`}
-                path={getPosterPath(result)}
-                type={TmdbImageTypes.poster}
-              />
-              <TmdbMovieHoverMask
-                result={result}
-                onClick={() => onMovieClick(result)}
-              />
-            </div>
-            <div className="fw-bold mt-2">{_get(result, 'original_title')}</div>
+          <div className="row gx-3 gy-3 my-2 py-4">
+            {recommendationData.map((result, idx) => (
+              <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
+                <div
+                  className="position-relative ratio rounded overflow-hidden"
+                  style={{ '--bs-aspect-ratio': '150%' }}
+                >
+                  <TmdbImage
+                    linkTo={`/movie?id=${getMovieId(result)}`}
+                    path={getPosterPath(result)}
+                    type={TmdbImageTypes.poster}
+                  />
+                  <TmdbMovieHoverMask
+                    result={result}
+                    onClick={() => onMovieClick(result)}
+                  />
+                </div>
+                <div className="fw-bold mt-2">
+                  {_get(result, 'original_title')}
+                </div>
+              </div>
+            ))}
+            {_range(skeletonSize).map((idx) => (
+              <LoadingSkeletonForMovieCard key={idx} />
+            ))}
           </div>
-        ))}
-        {_range(skeletonSize).map((idx) => (
-          <LoadingSkeletonForMovieCard key={idx} />
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 });

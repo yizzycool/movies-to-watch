@@ -20,7 +20,7 @@ export default function useQueryAiRecommendedWatchlist({
     genres: _map(data.genres, (genre) => _get(genre, 'name')),
   }));
 
-  const [trigger, { data }] = useGetAiRecommendationMutation();
+  const [trigger, { data, isError }] = useGetAiRecommendationMutation();
   const { recommendations: aiRecommendations = [] } = data || {};
 
   // Call api to get ai recommendation data
@@ -35,5 +35,6 @@ export default function useQueryAiRecommendedWatchlist({
     setRun,
     aiRecommendations,
     aiRecommendationParams,
+    isError,
   };
 }
