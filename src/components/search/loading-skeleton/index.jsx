@@ -11,7 +11,7 @@ export default function LoadingSkeleton() {
               className="position-relative ratio rounded placeholder"
               style={{ '--bs-aspect-ratio': '150%' }}
             />
-            <div className="mt-2 rounded placeholder col-10" />
+            <div className="mt-2 rounded placeholder col-12" />
           </div>
         ))}
       </div>

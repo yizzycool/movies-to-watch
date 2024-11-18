@@ -16,6 +16,8 @@ export default function MovieLists({
 
   const getPosterPath = (result) => _get(result, 'poster_path', '');
 
+  const getTitle = (result) => _get(result, 'title', '');
+
   return (
     <div className="container-fluid bg-body-secondary py-5 border-top">
       <div className="container-xl">
@@ -44,6 +46,9 @@ export default function MovieLists({
                     path={getPosterPath(result)}
                     type={TmdbImageTypes.poster}
                   />
+                </div>
+                <div className="fw-bold mt-2 text-center">
+                  {getTitle(result)}
                 </div>
               </SwiperSlide>
             ))}
