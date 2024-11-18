@@ -59,6 +59,7 @@ export default function Cast() {
                     <TmdbImage
                       path={getProfilePath(result)}
                       type={TmdbImageTypes.profile}
+                      emptyContent={<i class="bi bi-person-square fs-1" />}
                     />
                   </div>
                   <div className="card-body">

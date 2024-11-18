@@ -24,7 +24,12 @@ export const TmdbImageAspectRatios = {
   [TmdbImageTypes.still]: 3 / 2,
 };
 
-export default function TmdbImage({ linkTo, path, type }) {
+export default function TmdbImage({
+  linkTo,
+  path,
+  type,
+  emptyContent = 'No Poster',
+}) {
   // Get configuration from redux data
   const { data: configuration } = useGetConfigurationQuery();
   const secureBaseUrl = _get(configuration, 'images.secure_base_url', '');
@@ -48,12 +53,12 @@ export default function TmdbImage({ linkTo, path, type }) {
     return null;
   }
 
-  // If no image path, return 'No Image'
+  // If no image path, return 'No Poster'
   if (!path) {
     return (
       <Wrapper linkTo={linkTo}>
         <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center bg-body-secondary text-secondary-emphasis pe-none">
-          No Poster
+          {emptyContent}
         </div>
       </Wrapper>
     );
