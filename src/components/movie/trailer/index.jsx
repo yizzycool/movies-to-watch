@@ -11,6 +11,7 @@ import YoutubeModal from '@/components/common/youtube-modal';
 import { SwiperSlide } from 'swiper/react';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
+import _filter from 'lodash/filter';
 
 export default function Trailer() {
   // Show video info when user hovering
@@ -30,6 +31,10 @@ export default function Trailer() {
     { skip: !movieData || movieDataIsLoading },
   );
   const { results } = data || {};
+  const filteredResults = _filter(
+    results,
+    (result) => result.site === 'YouTube',
+  );
 
   // Get youtube image path
   const getImagePath = (result) => {
@@ -47,8 +52,12 @@ export default function Trailer() {
     const key = _get(result, 'key', '');
     if (!key) {
       setYoutubeSrc(null);
+      return;
     }
     setYoutubeSrc(`https://www.youtube.com/embed/${key}`);
+    const modalEl = document.getElementById('youtube-modal');
+    const modalBootstrap = window.bootstrap.Modal.getOrCreateInstance(modalEl);
+    modalBootstrap?.show();
   };
 
   if (_isEmpty(results)) {
@@ -60,17 +69,20 @@ export default function Trailer() {
       <div className="container-xl">
         <h3 className="mb-4 fw-bold">Trailers</h3>
         <SwiperCarouselVideo>
-          {results.map((result, idx) => (
+          {filteredResults.map((result, idx) => (
             <SwiperSlide key={idx}>
               <button
                 type="button"
-                className="btn ratio rounded overflow-hidden cursor-pointer"
-                style={{ '--bs-aspect-ratio': '56.25%' }}
+                className="btn ratio rounded overflow-hidden"
+                style={{
+                  '--bs-aspect-ratio': '56.25%',
+                  '--bs-btn-border-width': 0,
+                }}
                 onPointerEnter={() => onPointerEnter(idx)}
                 onPointerOut={onPointerOut}
                 onClick={() => onClick(result)}
-                data-bs-toggle="modal"
-                data-bs-target="#youtube-modal"
+                // data-bs-toggle="modal"
+                // data-bs-target="#youtube-modal"
               >
                 <Image
                   className="loading-skeleton w-100 h-100 object-fit-cover rounded user-select-none"
@@ -85,6 +97,7 @@ export default function Trailer() {
                     hovering === idx ? styles.maskHovering : styles.mask
                   }
                 />
+                <i className="bi bi-square-fill fs-5 d-flex justify-content-center align-items-center text-light shadow-lg" />
                 <i className="bi bi-youtube fs-1 d-flex justify-content-center align-items-center text-danger shadow-lg " />
               </button>
             </SwiperSlide>
