@@ -1,13 +1,22 @@
 // These are BS default values
 $theme-colors: (
-  "primary": #0d6efd,
-  "secondary": #6c757d,
-  "success": #198754,
-  "info": #0dcaf0,
-  "warning": #ffc107,
-  "danger": #dc3545,
-  "light": #f8f9fa,
-  "dark": #212529,
+  'primary': #0d6efd,
+  'secondary': #6c757d,
+  'success': #198754,
+  'info': #0dcaf0,
+  'warning': #ffc107,
+  'danger': #dc3545,
+  'light': #f8f9fa,
+  'dark': #212529,
 );
 
-@import "/node_modules/bootstrap/scss/bootstrap";
+@import '/node_modules/bootstrap/scss/bootstrap';
+
+.placeholder {
+  background-color: currentcolor;
+  cursor: unset;
+  display: inline-block;
+  min-height: 1em;
+  opacity: 0.5;
+  vertical-align: middle;
+}
