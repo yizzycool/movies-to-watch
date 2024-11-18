@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import _isEmpty from 'lodash/isEmpty';
+import _join from 'lodash/join';
 
 export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
@@ -38,8 +40,12 @@ export const tmdbApi = createApi({
       },
     }),
     getMovieDetails: builder.query({
-      query: ({ id, language = 'en-US' }) => {
-        return `movie/${id}?language=${language}`;
+      query: ({ id, language = 'en-US', appendToResponse = [] }) => {
+        let path = `movie/${id}?language=${language}`;
+        if (!_isEmpty(appendToResponse)) {
+          path += `&append_to_response=${_join(appendToResponse, ',')}`;
+        }
+        return path;
       },
     }),
     getMovieCredits: builder.query({
