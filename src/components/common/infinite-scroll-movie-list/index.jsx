@@ -8,6 +8,7 @@ import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 
 export default function InfiniteScrollMovieList({
+  isEmpty,
   fetchedData,
   isFetching,
   onNext = () => {},
@@ -42,7 +43,7 @@ export default function InfiniteScrollMovieList({
       {_isEmpty(fetchedData) ? (
         <LoadingSkeleton />
       ) : (
-        <div className="row gx-3 gy-3 my-5">
+        <div className={`row gx-3 gy-3 my-5 ${isEmpty ? 'd-none' : ''}`}>
           {fetchedData?.results.map((result, idx) => (
             <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
               <div
@@ -68,7 +69,7 @@ export default function InfiniteScrollMovieList({
       )}
       <div
         id="result-spinner"
-        className={`spinner-border mb-5 ${!isFetching ? 'opacity-0' : ''}`}
+        className={`spinner-border mb-5 ${!isFetching ? 'opacity-0' : ''} ${isEmpty ? 'd-none' : ''}`}
       />
     </>
   );

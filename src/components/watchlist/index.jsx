@@ -54,7 +54,10 @@ export default function Watchlist() {
   };
 
   return (
-    <div className="container-xl position-relative h-100">
+    <div
+      className="container-xl position-relative"
+      style={{ minHeight: '100%' }}
+    >
       <YourWatchlist
         fetchedData={fetchedData}
         userSelection={userSelection}
