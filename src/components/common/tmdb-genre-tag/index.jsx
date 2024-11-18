@@ -1,6 +1,7 @@
 import { useGetGenreListsQuery } from '@/store/apis/tmdb';
 import _find from 'lodash/find';
 import _get from 'lodash/get';
+import _slice from 'lodash/slice';
 
 export default function TmdbGenreTag({ genreIds = [] }) {
   // Get genre lists
@@ -16,10 +17,10 @@ export default function TmdbGenreTag({ genreIds = [] }) {
 
   return (
     <div className="w-100 d-flex flex-wrap justify-content-center">
-      {genreIds.map((id) => (
+      {_slice(genreIds, 0, 5).map((id) => (
         <div
           key={id}
-          className="bg-body-secondary rounded p-1 m-1"
+          className="badge text-bg-secondary m-1"
           style={{ fontSize: '12px' }}
         >
           {getGenreName(id)}

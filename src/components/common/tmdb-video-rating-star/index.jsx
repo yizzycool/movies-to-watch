@@ -21,7 +21,7 @@ export default function TmdbVideoRatingStar({
   const emptyStar = BASE - fullStar - halfStar;
 
   return (
-    <div>
+    <div className="text-center">
       {_range(fullStar).map((idx) => (
         <i key={idx} className="bi bi-star-fill text-warning me-1" />
       ))}

@@ -57,7 +57,7 @@ export default function TmdbImage({
   if (!path) {
     return (
       <Wrapper linkTo={linkTo}>
-        <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center bg-body-secondary text-secondary-emphasis pe-none">
+        <div className="d-flex w-100 h-100 flex-column justify-content-center align-items-center bg-secondary-subtle text-secondary-emphasis pe-none">
           {emptyContent}
         </div>
       </Wrapper>
