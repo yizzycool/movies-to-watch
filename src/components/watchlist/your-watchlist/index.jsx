@@ -37,12 +37,12 @@ export default function YourWatchlist({
   };
 
   return (
-    <div className="container-xl text-center">
+    <div className="container-xl text-center pt-5">
       {_isEmpty(fetchedData) ? (
         <LoadingSkeleton />
       ) : (
         <>
-          <div className="fs-3 mt-5">Your Watch List</div>
+          <div className="fs-3">Your Watch List</div>
           <div className="row gx-3 gy-3 my-5">
             {fetchedData.map((result, idx) => (
               <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">

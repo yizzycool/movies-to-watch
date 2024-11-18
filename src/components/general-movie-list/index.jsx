@@ -38,8 +38,8 @@ export default function GeneralMovieList({ title, useLazyGetQueryFunc }) {
   };
 
   return (
-    <div className="container-xl text-center">
-      <div className="fs-3 mt-5">{title}</div>
+    <div className="container-xl text-center pt-5">
+      <div className="fs-3">{title}</div>
       <InfiniteScrollMovieList
         fetchedData={fetchedData}
         isFetching={isFetching}

@@ -86,7 +86,7 @@ export default function SlotMachine({ fetchedData }) {
     <>
       <button
         type="button"
-        className="btn position-absolute top-0 end-0"
+        className="btn position-absolute top-0 end-0 mt-5"
         data-bs-toggle="modal"
         data-bs-target="#slot-machine"
         style={{ '--bs-btn-border-width': '0' }}

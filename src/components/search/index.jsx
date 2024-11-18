@@ -46,8 +46,8 @@ export default function Search() {
   };
 
   return (
-    <div className="container-xl text-center">
-      <div className="fs-3 mt-5">
+    <div className="container-xl text-center pt-5 h-100">
+      <div className="fs-3">
         Search Results for <span className="text-info">{query}</span>
       </div>
       <InfiniteScrollMovieList

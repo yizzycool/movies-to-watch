@@ -9,7 +9,7 @@ export default function LoadingSkeleton() {
             className="flex-shrink-1 w-25 ratio"
             style={{ '--bs-aspect-ratio': '150%' }}
           >
-            <div className="placeholder" />
+            <div className="placeholder rounded" />
           </div>
           <div className="w-75 ps-5">
             <h1 className="fs-3 placeholder col-4 rounded" />
