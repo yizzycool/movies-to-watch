@@ -3,11 +3,12 @@ import { SwiperSlide } from 'swiper/react';
 import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import LoadingSkeleton from './loading-skeleton';
+import NoData from './no-data';
 import _isEmpty from 'lodash/isEmpty';
 import _get from 'lodash/get';
 import _filter from 'lodash/filter';
 
-export default function Cast({ data, isLoading }) {
+export default function Cast({ data, isFetching }) {
   // Get cast of type 'Acting'
   const results = useMemo(() => {
     const cast = _get(data, 'credits.cast', []);
@@ -16,6 +17,8 @@ export default function Cast({ data, isLoading }) {
       (person) => _get(person, 'known_for_department') === 'Acting',
     );
   }, [data]);
+
+  const noData = !isFetching && _isEmpty(results);
 
   const getProfilePath = (result) => _get(result, 'profile_path', '');
 
@@ -27,7 +30,9 @@ export default function Cast({ data, isLoading }) {
     <div className="container-fluid bg-body-secondary py-5 border-top">
       <div className="container-xl">
         <h3 className="mb-4 fw-bold">Cast</h3>
-        {isLoading || _isEmpty(results) ? (
+        {noData ? (
+          <NoData />
+        ) : isFetching || _isEmpty(results) ? (
           <LoadingSkeleton />
         ) : (
           <SwiperCarouselImage>

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import MovieLists from '@/components/home/movie-lists';
 import _get from 'lodash/get';
 
-export default function Similar({ data, isLoading }) {
+export default function Similar({ data, isFetching }) {
   const results = useMemo(() => {
     return _get(data, 'similar.results', []);
   }, [data]);
@@ -10,7 +10,7 @@ export default function Similar({ data, isLoading }) {
   return (
     <MovieLists
       title="Similar"
-      isLoading={isLoading}
+      isLoading={isFetching}
       results={results}
       linkTo={null}
     />

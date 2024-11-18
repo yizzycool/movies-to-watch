@@ -11,7 +11,7 @@ export default function Movie() {
   const id = router.query?.id || null;
 
   // Get movie details with param 'appendToResponse'
-  const { data, isLoading } = useGetMovieDetailsQuery(
+  const { data, isFetching } = useGetMovieDetailsQuery(
     {
       id,
       appendToResponse: [
@@ -28,11 +28,11 @@ export default function Movie() {
 
   return (
     <>
-      <Intro data={data} isLoading={isLoading} />
-      <Cast data={data} isLoading={isLoading} />
-      <Trailer data={data} isLoading={isLoading} />
-      <Recommendations data={data} isLoading={isLoading} />
-      <Similar data={data} isLoading={isLoading} />
+      <Intro data={data} isFetching={isFetching} />
+      <Cast data={data} isFetching={isFetching} />
+      <Trailer data={data} isFetching={isFetching} />
+      <Recommendations data={data} isFetching={isFetching} />
+      <Similar data={data} isFetching={isFetching} />
     </>
   );
 }

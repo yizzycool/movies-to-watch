@@ -4,12 +4,13 @@ import Image from 'next/image';
 import SwiperCarouselVideo from '@/components/common/swiper-carousel-video';
 import YoutubeModal from '@/components/common/youtube-modal';
 import LoadingSkeleton from './loading-skeleton';
+import NoData from './no-data';
 import { SwiperSlide } from 'swiper/react';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _filter from 'lodash/filter';
 
-export default function Trailer({ data, isLoading }) {
+export default function Trailer({ data, isFetching }) {
   // Show video info when user hovering
   const [hovering, setHovering] = useState(false);
   // Set youtube video key
@@ -20,6 +21,8 @@ export default function Trailer({ data, isLoading }) {
     const videoResults = _get(data, 'videos.results', []);
     return _filter(videoResults, (result) => result.site === 'YouTube');
   }, [data]);
+
+  const noData = !isFetching && _isEmpty(results);
 
   // Get youtube image path
   const getImagePath = (result) => {
@@ -49,7 +52,9 @@ export default function Trailer({ data, isLoading }) {
     <div className="container-fluid bg-body-secondary py-5 border-top">
       <div className="container-xl">
         <h3 className="mb-4 fw-bold">Trailers</h3>
-        {isLoading || _isEmpty(results) ? (
+        {noData ? (
+          <NoData />
+        ) : isFetching || _isEmpty(results) ? (
           <LoadingSkeleton />
         ) : (
           <SwiperCarouselVideo>

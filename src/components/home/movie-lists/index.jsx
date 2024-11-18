@@ -4,6 +4,7 @@ import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
 import LoadingSkeleton from './loading-skeleton';
 import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
+import NoData from './no-data';
 import Link from 'next/link';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
@@ -15,6 +16,8 @@ export default function MovieLists({
   linkTo = '/',
 }) {
   const router = useRouter();
+
+  const noData = !isLoading && _isEmpty(results);
 
   const getMovieId = (result) => _get(result, 'id', null);
 
@@ -43,7 +46,9 @@ export default function MovieLists({
             </Link>
           )}
         </h3>
-        {isLoading || _isEmpty(results) ? (
+        {noData ? (
+          <NoData />
+        ) : isLoading || _isEmpty(results) ? (
           <LoadingSkeleton />
         ) : (
           <SwiperCarouselImage>

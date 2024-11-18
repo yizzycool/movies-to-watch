@@ -10,7 +10,7 @@ import _join from 'lodash/join';
 import _isEmpty from 'lodash/isEmpty';
 import _slice from 'lodash/slice';
 
-export default function Intro({ data, isLoading }) {
+export default function Intro({ data, isFetching }) {
   // Function that return value of key from data if exists. Otherwise return defaultValue.
   const getValue = (key, defaultValue = null) => {
     return _get(data, key, defaultValue);
@@ -34,10 +34,10 @@ export default function Intro({ data, isLoading }) {
     );
     const popularity = getValue('popularity');
     return [
-      { title: 'Genres', data: _join(genres, ', ') },
-      { title: 'Country', data: country },
-      { title: 'Language', data: _join(spokenLanguages, ', ') },
-      { title: 'Popularity', data: popularity },
+      { title: 'Genres', data: _join(genres, ', ') || '-' },
+      { title: 'Country', data: country || '-' },
+      { title: 'Language', data: _join(spokenLanguages, ', ') || '-' },
+      { title: 'Popularity', data: popularity || '-' },
     ];
   }, [data]);
 
@@ -45,7 +45,7 @@ export default function Intro({ data, isLoading }) {
     return _slice(_get(data, 'keywords.keywords', []), 0, 5);
   }, [data]);
 
-  if (isLoading || _isEmpty(data)) {
+  if (isFetching || _isEmpty(data)) {
     return <LoadingSkeleton />;
   }
 
@@ -55,11 +55,15 @@ export default function Intro({ data, isLoading }) {
         <TmdbImage
           path={getValue('backdrop_path')}
           type={TmdbImageTypes.backdrop}
+          emptyContent=""
         />
       </div>
       <div className="container-xl py-5">
         <div className="d-flex align-items-start">
-          <div className="flex-shrink-1 w-25 rounded overflow-hidden">
+          <div
+            className="flex-shrink-1 w-25 rounded overflow-hidden ratio"
+            style={{ '--bs-aspect-ratio': '150%' }}
+          >
             <TmdbImage
               path={getValue('poster_path')}
               type={TmdbImageTypes.poster}
@@ -70,11 +74,11 @@ export default function Intro({ data, isLoading }) {
               <h1 className="fs-2 fw-bold">{getValue('original_title')}</h1>
               <FavoriteButton id={getValue('id')} />
             </div>
-            <div className="d-flex">
+            <div className="d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
               {!!releaseYear && (
                 <>
                   <div>{releaseYear}</div>
-                  <i className="bi bi-dot"></i>
+                  <i className="bi bi-dot d-none d-sm-block"></i>
                 </>
               )}
               {!!getValue('vote_count') && (
