@@ -29,9 +29,9 @@ export default function Header() {
         <div className="container-xl">
           <Link className="navbar-brand p-0 d-flex align-items-center" href="/">
             <Image
-              src="/favicon.png"
+              src="/assets/images/home/logo.png"
               alt="Logo"
-              width="40"
+              width="42"
               height="32"
               className="d-inline-block align-text-top me-2"
             />
