@@ -4,7 +4,7 @@ import _range from 'lodash/range';
 export default function LoadingSkeleton() {
   return (
     <>
-      <div className="fs-3 mt-5">Parparing Your Watch List...</div>
+      <div className="fs-3">Parparing Your Watch List...</div>
       <div className="row gx-3 gy-3 my-5 placeholder-glow">
         {_range(12).map((idx) => (
           <LoadingSkeletonForMovieCard key={idx} />

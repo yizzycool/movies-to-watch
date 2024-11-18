@@ -23,6 +23,8 @@ export default function Watchlist() {
   // Get watchlist from redux
   const watchlist = useSelector((state) => state.user.watchlist);
 
+  const noWatchlist = _isEmpty(watchlist);
+
   const [trigger, result] = useLazyGetMovieDetailsQuery();
   const { data } = result;
 
@@ -69,7 +71,7 @@ export default function Watchlist() {
         fetchedData={fetchedData}
         userSelection={userSelection}
       />
-      <SlotMachine fetchedData={fetchedData} />
+      {!noWatchlist && <SlotMachine fetchedData={fetchedData} />}
     </div>
   );
 }

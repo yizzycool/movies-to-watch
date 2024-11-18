@@ -6,6 +6,7 @@ import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
 import LoadingSkeleton from './loading-skeleton';
 import LoadingSkeletonForMovieCard from './loading-skeleton/movie-card';
 import AiGenBlock from './ai-gen-block';
+import NoWatchlist from './no-watchlist';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 import _size from 'lodash/size';
@@ -20,6 +21,8 @@ export default function YourWatchlist({
   const router = useRouter();
 
   const watchlist = useSelector((state) => state.user.watchlist);
+
+  const noWatchlist = _isEmpty(watchlist);
 
   // Counts of unqueried movie id
   const skeletonSize = useMemo(() => {
@@ -38,42 +41,48 @@ export default function YourWatchlist({
 
   return (
     <div className="container-xl text-center pt-5">
-      {_isEmpty(fetchedData) ? (
+      {!noWatchlist && _isEmpty(fetchedData) ? (
         <LoadingSkeleton />
       ) : (
         <>
           <div className="fs-3">Your Watch List</div>
-          <div className="row gx-3 gy-3 my-5">
-            {fetchedData.map((result, idx) => (
-              <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <div
-                  className="position-relative ratio rounded overflow-hidden"
-                  style={{ '--bs-aspect-ratio': '150%' }}
-                >
-                  <TmdbImage
-                    linkTo={`/movie?id=${getMovieId(result)}`}
-                    path={getPosterPath(result)}
-                    type={TmdbImageTypes.poster}
-                  />
-                  <TmdbMovieHoverMask
-                    result={result}
-                    onClick={() => onMovieClick(result)}
-                  />
+          {noWatchlist ? (
+            <NoWatchlist />
+          ) : (
+            <div className="row gx-3 gy-3 my-5">
+              {fetchedData.map((result, idx) => (
+                <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
+                  <div
+                    className="position-relative ratio rounded overflow-hidden"
+                    style={{ '--bs-aspect-ratio': '150%' }}
+                  >
+                    <TmdbImage
+                      linkTo={`/movie?id=${getMovieId(result)}`}
+                      path={getPosterPath(result)}
+                      type={TmdbImageTypes.poster}
+                    />
+                    <TmdbMovieHoverMask
+                      result={result}
+                      onClick={() => onMovieClick(result)}
+                    />
+                  </div>
+                  <div className="fw-bold mt-2">
+                    {_get(result, 'original_title')}
+                  </div>
                 </div>
-                <div className="fw-bold mt-2">
-                  {_get(result, 'original_title')}
-                </div>
-              </div>
-            ))}
-            {_range(skeletonSize).map((idx) => (
-              <LoadingSkeletonForMovieCard key={idx} />
-            ))}
-            <AiGenBlock
-              userSelection={userSelection}
-              setUserSelection={setUserSelection}
-              startAiRecommendation={startAiRecommendation}
-            />
-          </div>
+              ))}
+              {_range(skeletonSize).map((idx) => (
+                <LoadingSkeletonForMovieCard key={idx} />
+              ))}
+              {skeletonSize === 0 && (
+                <AiGenBlock
+                  userSelection={userSelection}
+                  setUserSelection={setUserSelection}
+                  startAiRecommendation={startAiRecommendation}
+                />
+              )}
+            </div>
+          )}
         </>
       )}
     </div>

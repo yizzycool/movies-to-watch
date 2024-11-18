@@ -1,8 +1,6 @@
 import Image from 'next/image';
 
-export default function NoResults({ isEmpty }) {
-  if (!isEmpty) return null;
-
+export default function NoWatchlist() {
   return (
     <div className="text-center py-5">
       <Image
@@ -11,7 +9,7 @@ export default function NoResults({ isEmpty }) {
         src="/assets/images/search/no-result.png"
         alt="no result"
       />
-      <div className="mt-3 fs-4">No Results Found</div>
+      <div className="mt-3 fs-4">No Watchlist</div>
     </div>
   );
 }

@@ -57,7 +57,7 @@ export default function FavoriteButton({ id }) {
     <button
       type="button"
       className="btn btn-secondary d-flex justify-content-center align-items-center rounded-circle"
-      style={{ minWidth: '45px', minHeight: '45px' }}
+      style={{ minWidth: '45px', minHeight: '45px', '--bs-border-width': 0 }}
       onClick={onClick}
     >
       {isFavorite ? (
