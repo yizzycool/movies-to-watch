@@ -1,9 +1,4 @@
-import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import {
-  useGetMovieCreditsQuery,
-  useGetMovieDetailsQuery,
-} from '@/store/apis/tmdb';
 import { SwiperSlide } from 'swiper/react';
 import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
@@ -12,23 +7,10 @@ import _isEmpty from 'lodash/isEmpty';
 import _get from 'lodash/get';
 import _filter from 'lodash/filter';
 
-export default function Cast() {
-  const router = useRouter();
-  const id = router.query?.id || null;
-
-  const { data: movieData, isLoading: movieDataIsLoading } =
-    useGetMovieDetailsQuery({ id }, { skip: !id });
-
-  // Query cast lists after querying movieData completed
-  const { data, isLoading } = useGetMovieCreditsQuery(
-    { id },
-    { skip: !movieData || movieDataIsLoading },
-  );
-
+export default function Cast({ data, isLoading }) {
   // Get cast of type 'Acting'
   const results = useMemo(() => {
-    if (_isEmpty(data)) return [];
-    const cast = _get(data, 'cast', []);
+    const cast = _get(data, 'credits.cast', []);
     return _filter(
       cast,
       (person) => _get(person, 'known_for_department') === 'Acting',

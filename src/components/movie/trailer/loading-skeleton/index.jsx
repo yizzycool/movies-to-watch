@@ -7,11 +7,11 @@ export default function LoadingSkeleton() {
 
   const columns = useMemo(() => {
     if (isWidthLg) {
-      return 6;
+      return 3;
     } else if (isWidthMd) {
-      return 5;
+      return 2;
     }
-    return 3;
+    return 1;
   }, [isWidthLg, isWidthMd]);
 
   return (
@@ -22,12 +22,8 @@ export default function LoadingSkeleton() {
             <div className="card rounded overflow-hidden">
               <div
                 className="ratio placeholder"
-                style={{ '--bs-aspect-ratio': '150%', cursor: 'unset' }}
+                style={{ '--bs-aspect-ratio': '56.25%', cursor: 'unset' }}
               />
-              <div className="card-body">
-                <div className="placeholder col-6" />
-                <div className="placeholder col-8" />
-              </div>
             </div>
           </div>
         ))}

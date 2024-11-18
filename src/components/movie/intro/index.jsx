@@ -1,6 +1,4 @@
 import moment from 'moment';
-import { useGetMovieDetailsQuery } from '@/store/apis/tmdb';
-import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import LoadingSkeleton from './loading-skeleton';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
@@ -10,13 +8,9 @@ import _get from 'lodash/get';
 import _map from 'lodash/map';
 import _join from 'lodash/join';
 import _isEmpty from 'lodash/isEmpty';
+import _slice from 'lodash/slice';
 
-export default function Intro() {
-  const router = useRouter();
-  const id = router.query?.id || null;
-
-  const { data, isLoading } = useGetMovieDetailsQuery({ id }, { skip: !id });
-
+export default function Intro({ data, isLoading }) {
   // Function that return value of key from data if exists. Otherwise return defaultValue.
   const getValue = (key, defaultValue = null) => {
     return _get(data, key, defaultValue);
@@ -45,6 +39,10 @@ export default function Intro() {
       { title: 'Language', data: _join(spokenLanguages, ', ') },
       { title: 'Popularity', data: popularity },
     ];
+  }, [data]);
+
+  const keywords = useMemo(() => {
+    return _slice(_get(data, 'keywords.keywords', []), 0, 5);
   }, [data]);
 
   if (isLoading || _isEmpty(data)) {
@@ -97,6 +95,18 @@ export default function Intro() {
               ))}
             </div>
             <div className="mt-3">{getValue('overview')}</div>
+            {!_isEmpty(keywords) && (
+              <div className="mt-5 d-flex align-items-center flex-wrap">
+                {keywords.map((keyword) => (
+                  <div
+                    key={keyword.id}
+                    className="badge text-bg-secondary me-2 mb-2"
+                  >
+                    {keyword.name}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
