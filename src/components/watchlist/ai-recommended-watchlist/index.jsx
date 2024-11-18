@@ -18,8 +18,9 @@ import _size from 'lodash/size';
 import _range from 'lodash/range';
 import _indexOf from 'lodash/indexOf';
 import _map from 'lodash/map';
-import _entries from 'lodash/entries';
 import _capitalize from 'lodash/capitalize';
+import _toPairs from 'lodash/toPairs';
+import _filter from 'lodash/filter';
 
 export default forwardRef(function AiRecommendedWatchlist(
   { fetchedData, userSelection },
@@ -42,6 +43,13 @@ export default forwardRef(function AiRecommendedWatchlist(
     if (run && _isEmpty(aiRecommendations)) return 10;
     return _size(aiRecommendations) - _size(recommendationData);
   }, [run, aiRecommendations, recommendationData]);
+
+  // Filter out empty arry
+  const filteredAiRecommendationParams = useMemo(() => {
+    const pairs = _toPairs(aiRecommendationParams);
+    const filteredPairs = _filter(pairs, (pair) => !_isEmpty(pair[1]));
+    return filteredPairs;
+  }, [aiRecommendationParams]);
 
   // Trigger Tmdb search API after get ai recommendation list (movie titles)
   useEffect(() => {
@@ -104,7 +112,7 @@ export default forwardRef(function AiRecommendedWatchlist(
       className="container-xl text-center border-top"
     >
       <div className="fs-3 my-5">AI Recommended Watchlist</div>
-      {_map(_entries(aiRecommendationParams), ([key, value]) => (
+      {_map(filteredAiRecommendationParams, ([key, value]) => (
         <div key={key} className="d-flex align-items-center my-3 fw-bold">
           {_capitalize(key)}:
           {_map(value, (item) => (
