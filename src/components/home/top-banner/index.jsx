@@ -27,16 +27,15 @@ export default function TopBanner() {
           className="flex-grow-1 text-center m-auto"
           style={{ maxWidth: '800px' }}
         >
-          <h1>Discover Your Next Favorite Movie</h1>
+          <h1 className="fw-bold">Discover Your Next Favorite Movie</h1>
           <h5
-            className="text-secondary-emphasis mt-5"
+            className="text-secondary-emphasis mt-4"
             style={{ lineHeight: '1.8rem' }}
           >
-            Unlock a world of cinematic adventure with personalized movie
-            recommendations tailored just for you. Explore thousands of films,
-            from hidden gems to the latest blockbusters, and find the perfect
-            movie for every mood. Start your journey now!
+            Unlock your cinematic adventure with personalized recommendations,
+            exploring everything from hidden gems to the latest blockbusters!
           </h5>
+          <div className="mt-5" />
           <button
             type="button"
             className="btn btn-light rounded-pill mt-5 px-5 py-2"
