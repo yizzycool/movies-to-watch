@@ -9,6 +9,8 @@ $theme-colors: (
   'light': #f8f9fa,
   'dark': #212529,
 );
+$font-family-base: 'Poppins', 'Poppins Fallback', var(--bs-font-sans-serif);
+$headings-font-family: 'Poppins', 'Poppins Fallback', var(--bs-font-sans-serif);
 
 @import '/node_modules/bootstrap/scss/bootstrap';
 
