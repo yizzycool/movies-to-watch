@@ -34,6 +34,7 @@ export default function NoData() {
           height="100"
           src="/assets/images/search/no-result.png"
           alt="no result"
+          loading="lazy"
         />
         <div className="fs-4">No Data</div>
       </div>

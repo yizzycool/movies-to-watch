@@ -8,6 +8,7 @@ export default function SomethingWentWrong() {
         height="300"
         src="/assets/images/watchlist/something-went-wrong.png"
         alt="something went wrong"
+        loading="lazy"
       />
       <div className="mt-3 fs-4">Oops!</div>
       <div className="mt-3">Something went wrong. Please try again later.</div>

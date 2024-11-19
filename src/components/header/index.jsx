@@ -34,6 +34,7 @@ export default function Header() {
               width="42"
               height="32"
               className="d-inline-block align-text-top me-2"
+              loading="lazy"
             />
             <div className="d-none d-sm-inline-block">Movies to Watch</div>
           </Link>

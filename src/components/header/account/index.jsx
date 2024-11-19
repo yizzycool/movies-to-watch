@@ -53,6 +53,7 @@ export default function Account() {
               height="96"
               className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
               alt="avatar"
+              loading="lazy"
             />
           ) : (
             <i className="bi bi-person-fill"></i>

@@ -92,6 +92,8 @@ export default function SignInModal() {
                 height="20"
                 src="/assets/images/account/google.svg"
                 className="me-2"
+                alt="google signin icon"
+                loading="lazy"
               />
               Continue with Google
             </button>

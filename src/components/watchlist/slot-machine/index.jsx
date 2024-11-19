@@ -96,6 +96,7 @@ export default function SlotMachine({ fetchedData }) {
           width="32"
           height="32"
           alt="slot machine icon"
+          loading="lazy"
         />
       </button>
       <div className="modal fade" id="slot-machine">
@@ -106,6 +107,7 @@ export default function SlotMachine({ fetchedData }) {
               width="1386"
               height="853"
               src="/assets/images/watchlist/background.png"
+              loading="lazy"
             />
             <div className="d-flex align-items-center z-3 mt-3 px-2">
               <h1

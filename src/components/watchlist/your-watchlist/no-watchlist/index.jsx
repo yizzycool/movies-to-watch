@@ -8,6 +8,7 @@ export default function NoWatchlist() {
         height="300"
         src="/assets/images/search/no-result.png"
         alt="no result"
+        loading="lazy"
       />
       <div className="mt-3 fs-4">No Watchlist</div>
     </div>
