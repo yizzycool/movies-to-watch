@@ -10,7 +10,7 @@ import { tmdbApi } from './apis/tmdb';
 import { firebaseApi } from './apis/firebase';
 import { geminiApi } from './apis/gemini';
 
-const reducers = combineReducers({
+export const reducers = combineReducers({
   config: configReducer,
   user: userReducer,
   toast: toastReducer,
