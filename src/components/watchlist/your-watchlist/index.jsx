@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { useSelector } from 'react-redux';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { useGetMovieDetailsQuery } from '@/store/apis/tmdb';
 import Intro from './intro';
 import Cast from './cast';

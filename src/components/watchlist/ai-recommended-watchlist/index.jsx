@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import useQueryAiRecommendedWatchlist from '@/hooks/watchlist/ai-recommended-watchlist/user-query-ai-recommended-watchlist';
 import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';

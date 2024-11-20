@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
 import InfiniteScrollMovieList from '../common/infinite-scroll-movie-list';
 import NoResults from './no-results';

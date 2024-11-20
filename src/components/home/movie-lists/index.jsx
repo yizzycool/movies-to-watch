@@ -1,5 +1,5 @@
 import { SwiperSlide } from 'swiper/react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
 import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
 import LoadingSkeleton from './loading-skeleton';

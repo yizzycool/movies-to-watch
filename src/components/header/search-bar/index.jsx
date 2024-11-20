@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/compat/router';
 import SearchHistory from './search-history';
 
 export default function SearchBar({ id }) {
