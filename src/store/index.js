@@ -26,7 +26,7 @@ export const store = configureStore({
       .concat(firebaseApi.middleware)
       .concat(geminiApi.middleware);
   },
-  devTools: true,
+  devTools: process.env.NEXT_PUBLIC_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);
