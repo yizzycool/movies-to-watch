@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import InfiniteScrollMovieList from '@/components/common/infinite-scroll-movie-list';
+import NoResults from '../search/no-results';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -37,14 +38,22 @@ export default function GeneralMovieList({ title, useLazyGetQueryFunc }) {
     trigger({ page: page + 1 });
   };
 
+  // Show empty if no results found
+  const isEmpty = !isFetching && _isEmpty(_get(fetchedData, 'results'));
+
   return (
-    <div className="container-xl text-center pt-5">
+    <div
+      className="container-xl text-center pt-5"
+      style={{ minHeight: '100%' }}
+    >
       <div className="fs-3">{title}</div>
       <InfiniteScrollMovieList
+        isEmpty={isEmpty}
         fetchedData={fetchedData}
         isFetching={isFetching}
         onNext={onNext}
       />
+      <NoResults isEmpty={isEmpty} />
     </div>
   );
 }

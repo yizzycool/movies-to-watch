@@ -40,7 +40,7 @@ export default function InfiniteScrollMovieList({
 
   return (
     <>
-      {_isEmpty(fetchedData) ? (
+      {_isEmpty(fetchedData) && !isEmpty ? (
         <LoadingSkeleton />
       ) : (
         <div className={`row gx-3 gy-3 my-5 ${isEmpty ? 'd-none' : ''}`}>
