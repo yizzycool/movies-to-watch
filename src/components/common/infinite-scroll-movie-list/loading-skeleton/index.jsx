@@ -2,7 +2,10 @@ import _range from 'lodash/range';
 
 export default function LoadingSkeleton() {
   return (
-    <div className="row gx-3 gy-3 my-5 placeholder-glow">
+    <div
+      className="row gx-3 gy-3 my-5 placeholder-glow"
+      data-testid="infinite-scroll-skeleton"
+    >
       {_range(20).map((idx) => (
         <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
           <div

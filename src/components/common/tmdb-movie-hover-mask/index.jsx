@@ -28,6 +28,7 @@ export default function TmdbMovieHoverMask({ result, onClick = () => {} }) {
       onPointerEnter={onPointerEnter}
       onPointerOut={onPointerOut}
       onClick={onClick}
+      data-testid="tmdb-movie-hover-mask"
     >
       <TmdbVideoRatingStar
         rating={_get(result, 'vote_average')}
