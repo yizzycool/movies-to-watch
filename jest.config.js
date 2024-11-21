@@ -1,6 +1,4 @@
 const nextJest = require('next/jest.js');
-// mock "fetch" in test environment
-require('cross-fetch/polyfill');
 
 /** @type {import('jest').Config} */
 const createJestConfig = nextJest({
@@ -12,6 +10,7 @@ const createJestConfig = nextJest({
 const config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  setupFiles: ['./jest.setup.js'],
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
@@ -20,7 +19,7 @@ const config = {
     '\\.(css|less|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
     // map swiper css to styleMock.js
     'swiper/css': '<rootDir>/__mocks__/styleMock.js',
-    '^@/(.*)$': '<rootDir>/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
 };
 
