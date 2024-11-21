@@ -3,7 +3,6 @@ import '@/styles/loading-skeleton.css';
 import '@/styles/custom-bootstrap.scss';
 import 'bootstrap-icons/font/bootstrap-icons.scss';
 import 'animate.css';
-// import '@/fonts/poppins';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { persistor, store } from '@/store';
