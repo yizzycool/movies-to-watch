@@ -4,19 +4,18 @@ import { createMocks } from 'node-mocks-http';
 // Mock "fetch" function
 global.fetch = jest.fn();
 
+// Run before each test
+beforeEach(() => {
+  process.env.TMDB_API_BASE_URL = 'https://api.themoviedb.org/3/';
+  process.env.TMDB_API_ACCESS_TOKEN = 'fake-access-token';
+});
+
+// Run after each test
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
 describe('TMDB API Proxy', () => {
-  // Run before each test
-  beforeEach(() => {
-    process.env.TMDB_API_BASE_URL = 'https://api.themoviedb.org/3/';
-    process.env.TMDB_API_ACCESS_TOKEN = 'fake-access-token';
-  });
-
-  // Run after each test
-  afterEach(() => {
-    jest.resetAllMocks();
-  });
-
-  // Test: Verify handling of non-GET request methods
   it('should return 405 for non-GET requests', async () => {
     // Create a mock request and response object
     const { req, res } = createMocks({ method: 'POST' });
@@ -28,7 +27,6 @@ describe('TMDB API Proxy', () => {
     expect(res._getJSONData()).toEqual({ error: 'Method Not Allowed' });
   });
 
-  // Test: Verify correct URL construction and forwarding of TMDB response
   it('should construct correct URL and forward TMDB response', async () => {
     // Create a mock request and response object
     const { req, res } = createMocks({
@@ -62,7 +60,6 @@ describe('TMDB API Proxy', () => {
     expect(res._getJSONData()).toEqual(mockApiResponse);
   });
 
-  // Test: Verify error handling for TMDB API failures
   it('should return error if TMDB API fails', async () => {
     // Create a mock request and response object
     const { req, res } = createMocks({
@@ -82,7 +79,6 @@ describe('TMDB API Proxy', () => {
     expect(res._getJSONData()).toEqual({ error: 'Not Found' });
   });
 
-  // Test: Verify error handling for missing environment variables
   it('should handle missing environment variables', async () => {
     delete process.env.TMDB_API_BASE_URL;
 
