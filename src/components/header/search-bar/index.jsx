@@ -61,7 +61,7 @@ export default function SearchBar({ id }) {
 
   return (
     <div className="dropdown">
-      <form className="d-flex flex-wrap" onSubmit={onSubmit}>
+      <form className="d-flex" onSubmit={onSubmit}>
         <input
           ref={inputRef}
           id={id}
