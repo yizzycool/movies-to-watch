@@ -29,6 +29,7 @@ export default function Header() {
         <div className="container-xl">
           <Link className="navbar-brand p-0 d-flex align-items-center" href="/">
             <Image
+              unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
               src="/assets/images/home/logo.png"
               alt="Logo"
               width="42"

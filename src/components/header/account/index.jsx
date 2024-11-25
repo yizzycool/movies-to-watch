@@ -48,6 +48,7 @@ export default function Account() {
         >
           {photoUrl ? (
             <Image
+              unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
               src={photoUrl}
               width="96"
               height="96"

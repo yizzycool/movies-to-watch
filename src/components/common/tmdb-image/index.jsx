@@ -67,6 +67,7 @@ export default function TmdbImage({
   return (
     <Wrapper linkTo={linkTo}>
       <Image
+        unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
         className="loading-skeleton w-100 h-100 object-fit-cover user-select-none"
         width={imageWidth}
         height={imageHeight}

@@ -30,6 +30,7 @@ export default function NoData() {
       </div>
       <div className="position-absolute top-0 left-0 w-100 h-100 d-flex justify-content-center align-items-center">
         <Image
+          unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
           width="100"
           height="100"
           src="/assets/images/search/no-result.png"

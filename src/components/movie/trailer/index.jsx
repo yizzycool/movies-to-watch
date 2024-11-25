@@ -74,6 +74,7 @@ export default function Trailer({ data, isFetching }) {
                   // data-bs-target="#youtube-modal"
                 >
                   <Image
+                    unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
                     className="loading-skeleton w-100 h-100 object-fit-cover rounded user-select-none"
                     width={1600}
                     height={900}

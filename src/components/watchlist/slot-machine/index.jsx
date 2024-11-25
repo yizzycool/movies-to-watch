@@ -92,6 +92,7 @@ export default function SlotMachine({ fetchedData }) {
         style={{ '--bs-btn-border-width': '0' }}
       >
         <Image
+          unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
           src="/assets/images/watchlist/slot-machine.png"
           width="32"
           height="32"
@@ -103,6 +104,7 @@ export default function SlotMachine({ fetchedData }) {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <Image
+              unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
               className="w-100 h-100 position-absolute z-2 pe-none"
               width="1386"
               height="853"

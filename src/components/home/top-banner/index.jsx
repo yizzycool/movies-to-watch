@@ -48,6 +48,7 @@ export default function TopBanner() {
       <div className={styles.backgroundBlock}>
         {_range(2).map((idx) => (
           <Image
+            unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
             key={idx}
             className={styles.backgroundImage}
             width="3000"

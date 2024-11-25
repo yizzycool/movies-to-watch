@@ -88,6 +88,7 @@ export default function SignInModal() {
               onClick={onSignIn}
             >
               <Image
+                unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
                 width="20"
                 height="20"
                 src="/assets/images/account/google.svg"

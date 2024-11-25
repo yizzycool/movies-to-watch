@@ -6,6 +6,7 @@ export default function NoResults({ isEmpty }) {
   return (
     <div className="text-center py-5">
       <Image
+        unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
         width="300"
         height="300"
         src="/assets/images/search/no-result.png"

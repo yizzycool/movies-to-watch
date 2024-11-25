@@ -4,6 +4,7 @@ export default function SomethingWentWrong() {
   return (
     <div className="py-5">
       <Image
+        unoptimized={true} // Enable unoptimized mode due to Vercel's image optimization limit.
         width="300"
         height="300"
         src="/assets/images/watchlist/something-went-wrong.png"
