@@ -9,8 +9,8 @@ import {
 import { useRouter } from 'next/compat/router';
 import useQueryAiRecommendedWatchlist from '@/hooks/watchlist/ai-recommended-watchlist/user-query-ai-recommended-watchlist';
 import { useLazySearchMoviesQuery } from '@/store/apis/tmdb';
-import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
-import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
+import { TmdbImageTypes } from '@/components/common/tmdb-image';
+import TmdbMovieCard from '@/components/common/tmdb-movie-card';
 import LoadingSkeletonForMovieCard from './loading-skeleton/movie-card';
 import SomethingWentWrong from './something-went-wrong';
 import _get from 'lodash/get';
@@ -130,20 +130,13 @@ export default forwardRef(function AiRecommendedWatchlist(
           <div className="row gx-3 gy-3 my-2 py-4">
             {recommendationData.map((result, idx) => (
               <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
-                <div
-                  className="position-relative ratio rounded overflow-hidden"
-                  style={{ '--bs-aspect-ratio': '150%' }}
-                >
-                  <TmdbImage
-                    linkTo={`/movie?id=${getMovieId(result)}`}
-                    path={getPosterPath(result)}
-                    type={TmdbImageTypes.poster}
-                  />
-                  <TmdbMovieHoverMask
-                    result={result}
-                    onClick={() => onMovieClick(result)}
-                  />
-                </div>
+                <TmdbMovieCard
+                  result={result}
+                  linkTo={`/movie?id=${getMovieId(result)}`}
+                  path={getPosterPath(result)}
+                  type={TmdbImageTypes.poster}
+                  onClick={() => onMovieClick(result)}
+                />
                 <div className="fw-bold mt-2">
                   {_get(result, 'original_title')}
                 </div>

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/compat/router';
 import useIntersectionObserver from '@/hooks/use-intersection-observer';
-import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
-import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
+import { TmdbImageTypes } from '@/components/common/tmdb-image';
 import LoadingSkeleton from './loading-skeleton';
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty';
+import TmdbMovieCard from '../tmdb-movie-card';
 
 export default function InfiniteScrollMovieList({
   isEmpty,
@@ -46,20 +46,13 @@ export default function InfiniteScrollMovieList({
         <div className={`row gx-3 gy-3 my-5 ${isEmpty ? 'd-none' : ''}`}>
           {fetchedData?.results.map((result, idx) => (
             <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2">
-              <div
-                className="position-relative ratio rounded overflow-hidden"
-                style={{ '--bs-aspect-ratio': '150%' }}
-              >
-                <TmdbImage
-                  linkTo={`/movie?id=${getMovieId(result)}`}
-                  path={getPosterPath(result)}
-                  type={TmdbImageTypes.poster}
-                />
-                <TmdbMovieHoverMask
-                  result={result}
-                  onClick={() => onMovieClick(result)}
-                />
-              </div>
+              <TmdbMovieCard
+                result={result}
+                linkTo={`/movie?id=${getMovieId(result)}`}
+                path={getPosterPath(result)}
+                type={TmdbImageTypes.poster}
+                onClick={() => onMovieClick(result)}
+              />
               <div className="fw-bold mt-2">
                 {_get(result, 'original_title')}
               </div>
