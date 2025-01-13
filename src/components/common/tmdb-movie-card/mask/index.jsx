@@ -1,14 +1,12 @@
-import styles from './index.module.scss';
-import { useMemo, useState } from 'react';
-import TmdbGenreTag from '../tmdb-genre-tag';
-import TmdbVideoRatingStar from '../tmdb-video-rating-star';
+import styles from './index.module.css';
+import { useMemo } from 'react';
+import TmdbGenreTag from '@/components/common/tmdb-genre-tag';
+import TmdbVideoRatingStar from '@/components/common/tmdb-video-rating-star';
 import _get from 'lodash/get';
 import _has from 'lodash/has';
 import _map from 'lodash/map';
 
 export default function TmdbMovieHoverMask({ result, onClick = () => {} }) {
-  const [hovering, setHovering] = useState(false);
-
   const genreIds = useMemo(() => {
     // Data format for API /movie/${id}
     if (_has(result, 'genres')) {
@@ -18,15 +16,9 @@ export default function TmdbMovieHoverMask({ result, onClick = () => {} }) {
     return _get(result, 'genre_ids', []);
   }, [result]);
 
-  const onPointerEnter = () => setHovering(true);
-
-  const onPointerOut = () => setHovering(false);
-
   return (
     <div
-      className={hovering ? styles.maskHovering : styles.mask}
-      onPointerEnter={onPointerEnter}
-      onPointerOut={onPointerOut}
+      className={styles.mask}
       onClick={onClick}
       data-testid="tmdb-movie-hover-mask"
     >
