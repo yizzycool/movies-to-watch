@@ -1,0 +1,16 @@
+@value mask from './mask/index.module.css';
+
+.card {
+  border-radius: var(--bs-border-radius) !important;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  & > .mask {
+    opacity: 0;
+  }
+
+  &:hover > .mask {
+    opacity: 1;
+  }
+}

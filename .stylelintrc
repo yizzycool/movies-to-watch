@@ -6,6 +6,7 @@
     "order/properties-alphabetical-order": true,
     "selector-pseudo-class-no-unknown": null,
     "property-no-unknown": null,
-    "selector-class-pattern": null
+    "selector-class-pattern": null,
+    "scss/at-rule-no-unknown": null
   }
 }

@@ -1,7 +1,7 @@
 import { SwiperSlide } from 'swiper/react';
 import { useRouter } from 'next/compat/router';
-import TmdbImage, { TmdbImageTypes } from '@/components/common/tmdb-image';
-import TmdbMovieHoverMask from '@/components/common/tmdb-movie-hover-mask';
+import { TmdbImageTypes } from '@/components/common/tmdb-image';
+import TmdbMovieCard from '@/components/common/tmdb-movie-card';
 import LoadingSkeleton from './loading-skeleton';
 import SwiperCarouselImage from '@/components/common/swiper-carousel-image';
 import NoData from './no-data';
@@ -54,20 +54,13 @@ export default function MovieLists({
           <SwiperCarouselImage>
             {results.map((result, index) => (
               <SwiperSlide key={index}>
-                <div
-                  className="ratio rounded overflow-hidden"
-                  style={{ '--bs-aspect-ratio': '150%' }}
-                >
-                  <TmdbImage
-                    linkTo={`/movie?id=${getMovieId(result)}`}
-                    path={getPosterPath(result)}
-                    type={TmdbImageTypes.poster}
-                  />
-                  <TmdbMovieHoverMask
-                    result={result}
-                    onClick={() => onMovieClick(result)}
-                  />
-                </div>
+                <TmdbMovieCard
+                  result={result}
+                  linkTo={`/movie?id=${getMovieId(result)}`}
+                  path={getPosterPath(result)}
+                  type={TmdbImageTypes.poster}
+                  onClick={() => onMovieClick(result)}
+                />
                 <div className="fw-bold mt-2 text-center">
                   {getTitle(result)}
                 </div>

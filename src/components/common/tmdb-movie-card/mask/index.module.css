@@ -1,5 +1,4 @@
-.mask,
-.maskHovering {
+.mask {
   align-items: center;
   background-color: rgb(0 0 0 / 80%);
   cursor: pointer;
@@ -17,8 +16,4 @@
   & * {
     pointer-events: none;
   }
-}
-
-.maskHovering {
-  opacity: 1;
 }
