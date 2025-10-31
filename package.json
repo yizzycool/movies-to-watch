@@ -11,7 +11,7 @@
     "test": "env-cmd -f .env.development env-cmd -f .env.api jest"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
+    "@google/genai": "^1.27.0",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.3.0",
     "animate.css": "^4.1.1",

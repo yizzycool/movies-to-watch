@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import _isEmpty from 'lodash/isEmpty';
 import _map from 'lodash/map';
 import _filter from 'lodash/filter';
@@ -7,10 +7,9 @@ import _join from 'lodash/join';
 import _split from 'lodash/split';
 import _trim from 'lodash/trim';
 
-// const modelType = 'gemini-1.5-flash';
-const modelType = 'gemini-1.5-flash-8b';
+const modelType = 'gemini-2.5-flash';
 const apiKey = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(apiKey);
+const genAI = new GoogleGenAI({ apiKey });
 
 const generationConfig = {
   temperature: 1,
@@ -18,14 +17,12 @@ const generationConfig = {
   topK: 40,
   maxOutputTokens: 500,
   responseMimeType: 'text/plain',
-};
-
-const model = genAI.getGenerativeModel({
-  model: modelType,
-  generationConfig,
   systemInstruction:
     'You are a movie recommendation assistant. You must respond to user queries by recommending exactly 10 movies based on the user\'s watchlist, selected genres, and current moods. Your responses should be in a bullet-point format, providing concise recommendations without any additional explanations or commentary. Do not include introductory or closing remarks. Only list the movie titles for each recommendation.\n\nConstraints:\nDo not recommend any movies that are already in the user\'s watchlist.\nRecommend movies that match the user\'s selected genres and current moods.\nFactors to Consider:\nThe user\'s watchlist: List the movies the user has marked as "to-watch," including their corresponding genres. For example:\n"Star Wars: The Rise of Skywalker" - Genres: Science Fiction, Adventure\n"Avengers: Endgame" - Genres: Action, Science Fiction\n"Harry Potter: The Sorcerer\'s Stone" - Genres: Fantasy, Adventure\nThe user\'s selected genres: The user can choose multiple movie genres they currently prefer (e.g., Romance, Mystery, Adventure, etc.). Please consider these multiple genres when filtering the recommended movies.\nThe user\'s current mood: The user\'s mood description can include multiple moods (e.g., Happy, Sad, Anxious, Excited, etc.). Please consider these multiple moods when recommending movies.\nBased on these three inputs, recommend suitable movies for the user, ensuring that no movie already listed in the watchlist is included in your recommendations.\n\nInput Format:\n- User\'s watchlist:\n  - "Star Wars: The Rise of Skywalker" - Genre: Sci-Fi, Adventure\n  - "Avengers: Endgame" - Genre: Action, Sci-Fi\n  - "Harry Potter: The Sorcerer\'s Stone" - Genre: Fantasy, Adventure\n- User\'s selected genres: Sci-Fi, Adventure\n- User\'s current moods: Excited, Happy\n\nOutput Format:\n- Blade Runner 2049\n- Avengers: Endgame\n- Star Wars: A New Hope\n- Guardians of the Galaxy\n- The Fifth Element\n- Ready Player One\n- Jurassic Park\n- Inception\n- Tron: Legacy\n- Dune',
-});
+  thinkingConfig: {
+    thinkingBudget: 0, // Disables thinking to speed up response time
+  },
+};
 
 export const config = {
   api: {
@@ -57,8 +54,12 @@ export default async function handler(req, res) {
 
 async function inference({ watchlist, selectedGenres, currentMoods }) {
   const prompt = generatePrompt(watchlist, selectedGenres, currentMoods);
-  const result = await model.generateContent(prompt);
-  const top10 = postProcess(result.response.text());
+  const result = await genAI.models.generateContent({
+    model: modelType,
+    contents: prompt,
+    config: generationConfig,
+  });
+  const top10 = postProcess(result.text);
   return top10;
 }
 
